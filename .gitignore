@@ -1,7 +1,7 @@
 
-MBR.Web/obj/
-MBR.Models/obj/
+MBR.Web/obj/*
+MBR.Models/obj/*
 .vs
-MBR.Web/bin/
-MBR.Models/bin/
+MBR.Web/bin/*
+MBR.Models/bin/*
 *.cache
