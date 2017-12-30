@@ -4,40 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MBRModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="MBRModelStoreContainer">
-          <EntitySet Name="Module" EntityType="MBRModel.Store.Module" store:Type="Tables" Schema="mbr" />
-          <EntitySet Name="ModulePermission" EntityType="MBRModel.Store.ModulePermission" store:Type="Tables" Schema="mbr" />
-          <EntitySet Name="Role" EntityType="MBRModel.Store.Role" store:Type="Tables" Schema="mbr" />
-          <EntitySet Name="RoleUser" EntityType="MBRModel.Store.RoleUser" store:Type="Tables" Schema="mbr" />
-          <EntitySet Name="SysException" EntityType="MBRModel.Store.SysException" store:Type="Tables" Schema="mbr" />
-          <EntitySet Name="SysLog" EntityType="MBRModel.Store.SysLog" store:Type="Tables" Schema="mbr" />
-          <EntitySet Name="User" EntityType="MBRModel.Store.User" store:Type="Tables" Schema="mbr" />
-          <AssociationSet Name="module_ibfk_1" Association="MBRModel.Store.module_ibfk_1">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="Module1" EntitySet="Module" />
-          </AssociationSet>
-          <AssociationSet Name="modulepermission_ibfk_1" Association="MBRModel.Store.modulepermission_ibfk_1">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="ModulePermission" EntitySet="ModulePermission" />
-          </AssociationSet>
-          <AssociationSet Name="roleuser_ibfk_1" Association="MBRModel.Store.roleuser_ibfk_1">
-            <End Role="User" EntitySet="User" />
-            <End Role="RoleUser" EntitySet="RoleUser" />
-          </AssociationSet>
-          <AssociationSet Name="roleuser_ibfk_2" Association="MBRModel.Store.roleuser_ibfk_2">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="RoleUser" EntitySet="RoleUser" />
-          </AssociationSet>
-        </EntityContainer>
+    <Schema Namespace="MBRModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="Module">
           <Key>
             <PropertyRef Name="ModuleID" />
           </Key>
-          <Property Name="ModuleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ParentId" Type="int" />
-          <Property Name="FullName" Type="varchar" Nullable="false" MaxLength="100" />
-          <Property Name="Code" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="FullName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Location" Type="varchar" MaxLength="200" />
           <Property Name="Target" Type="varchar" MaxLength="50" />
           <Property Name="Icon" Type="varchar" MaxLength="200" />
@@ -51,7 +26,7 @@
           <Key>
             <PropertyRef Name="ModulePermissionID" />
           </Key>
-          <Property Name="ModulePermissionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ModulePermissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Category" Type="int" />
           <Property Name="ObjectID" Type="int" />
           <Property Name="ModuleID" Type="int" />
@@ -60,7 +35,7 @@
           <Key>
             <PropertyRef Name="RoleID" />
           </Key>
-          <Property Name="RoleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CompanyID" Type="int" />
           <Property Name="Category" Type="int" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
@@ -81,43 +56,52 @@
           <Key>
             <PropertyRef Name="SysExceptionID" />
           </Key>
-          <Property Name="SysExceptionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SysExceptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HelpLink" Type="varchar" MaxLength="500" />
           <Property Name="Message" Type="varchar" MaxLength="500" />
           <Property Name="Source" Type="varchar" MaxLength="500" />
           <Property Name="StackTrace" Type="text" />
           <Property Name="TargetSite" Type="varchar" MaxLength="500" />
           <Property Name="Data" Type="varchar" MaxLength="500" />
-          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateTime" Type="datetime" Precision="0" />
         </EntityType>
         <EntityType Name="SysLog">
           <Key>
             <PropertyRef Name="SysLogID" />
           </Key>
-          <Property Name="SysLogID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SysLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Operator" Type="varchar" MaxLength="50" />
           <Property Name="Message" Type="varchar" MaxLength="200" />
           <Property Name="Result" Type="varchar" MaxLength="20" />
           <Property Name="Type" Type="varchar" MaxLength="20" />
           <Property Name="Module" Type="varchar" MaxLength="20" />
-          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateTime" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Address" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CompanyID" Type="int" />
-          <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="RealName" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RealName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Enabled" Type="bool" />
           <Property Name="OrderBy" Type="int" />
           <Property Name="Remark" Type="varchar" MaxLength="200" />
         </EntityType>
         <Association Name="module_ibfk_1">
-          <End Role="Module" Type="MBRModel.Store.Module" Multiplicity="0..1" />
-          <End Role="Module1" Type="MBRModel.Store.Module" Multiplicity="*" />
+          <End Role="Module" Type="Self.Module" Multiplicity="0..1" />
+          <End Role="Module1" Type="Self.Module" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="ModuleID" />
@@ -128,8 +112,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="modulepermission_ibfk_1">
-          <End Role="Module" Type="MBRModel.Store.Module" Multiplicity="0..1" />
-          <End Role="ModulePermission" Type="MBRModel.Store.ModulePermission" Multiplicity="*" />
+          <End Role="Module" Type="Self.Module" Multiplicity="0..1" />
+          <End Role="ModulePermission" Type="Self.ModulePermission" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="ModuleID" />
@@ -140,8 +124,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="roleuser_ibfk_1">
-          <End Role="User" Type="MBRModel.Store.User" Multiplicity="1" />
-          <End Role="RoleUser" Type="MBRModel.Store.RoleUser" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="RoleUser" Type="Self.RoleUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserID" />
@@ -152,8 +136,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="roleuser_ibfk_2">
-          <End Role="Role" Type="MBRModel.Store.Role" Multiplicity="1" />
-          <End Role="RoleUser" Type="MBRModel.Store.RoleUser" Multiplicity="*" />
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="RoleUser" Type="Self.RoleUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="RoleID" />
@@ -163,6 +147,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="MBRModelStoreContainer">
+          <EntitySet Name="Module" EntityType="Self.Module" Schema="mbr" store:Type="Tables" />
+          <EntitySet Name="ModulePermission" EntityType="Self.ModulePermission" Schema="mbr" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="mbr" store:Type="Tables" />
+          <EntitySet Name="RoleUser" EntityType="Self.RoleUser" Schema="mbr" store:Type="Tables" />
+          <EntitySet Name="SysException" EntityType="Self.SysException" Schema="mbr" store:Type="Tables" />
+          <EntitySet Name="SysLog" EntityType="Self.SysLog" Schema="mbr" store:Type="Tables" />
+          <EntitySet Name="Test" EntityType="Self.Test" Schema="mbr" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="mbr" store:Type="Tables" />
+          <AssociationSet Name="module_ibfk_1" Association="Self.module_ibfk_1">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="Module1" EntitySet="Module" />
+          </AssociationSet>
+          <AssociationSet Name="modulepermission_ibfk_1" Association="Self.modulepermission_ibfk_1">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModulePermission" EntitySet="ModulePermission" />
+          </AssociationSet>
+          <AssociationSet Name="roleuser_ibfk_1" Association="Self.roleuser_ibfk_1">
+            <End Role="User" EntitySet="User" />
+            <End Role="RoleUser" EntitySet="RoleUser" />
+          </AssociationSet>
+          <AssociationSet Name="roleuser_ibfk_2" Association="Self.roleuser_ibfk_2">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="RoleUser" EntitySet="RoleUser" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -186,6 +196,7 @@
             <End Role="User" EntitySet="User" />
             <End Role="Role" EntitySet="Role" />
           </AssociationSet>
+          <EntitySet Name="Test" EntityType="MBRModel.Test" />
         </EntityContainer>
         <EntityType Name="Module">
           <Key>
@@ -298,6 +309,15 @@
           <End Type="MBRModel.User" Role="User" Multiplicity="*" />
           <End Type="MBRModel.Role" Role="Role" Multiplicity="*" />
         </Association>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -395,6 +415,16 @@
               <ScalarProperty Name="UserID" ColumnName="UserID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Test">
+            <EntityTypeMapping TypeName="MBRModel.Test">
+              <MappingFragment StoreEntitySet="Test">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -412,11 +442,12 @@
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="MBR" ZoomLevel="75">
+      <Diagram Name="MBR" ZoomLevel="97">
         <EntityTypeShape EntityType="MBRModel.Module" Width="1.5" PointX="0.75" PointY="1" Height="3.8802294921874991" />
         <EntityTypeShape EntityType="MBRModel.ModulePermission" Width="1.5" PointX="3" PointY="2" Height="1.9700325520833335" />
         <EntityTypeShape EntityType="MBRModel.Role" Width="1.5" PointX="5" PointY="5" Height="2.7341113281249996" />
@@ -437,6 +468,7 @@
           <ConnectorPoint PointX="4.25" PointY="6.3670556640625" />
           <ConnectorPoint PointX="5" PointY="6.3670556640625" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="MBRModel.Test" Width="1.5" PointX="7.875" PointY="4.5" />
       </Diagram>
     </Diagrams>
   </Designer>

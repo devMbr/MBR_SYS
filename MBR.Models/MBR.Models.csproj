@@ -80,6 +80,9 @@
     <Compile Include="SysLog.cs">
       <DependentUpon>MBR.tt</DependentUpon>
     </Compile>
+    <Compile Include="Test.cs">
+      <DependentUpon>MBR.tt</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>MBR.tt</DependentUpon>
     </Compile>

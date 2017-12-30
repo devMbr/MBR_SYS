@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@MBR.Web.Constants.PRODUCT_NAME</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="~/Scripts/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Scripts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="~/Content/css/skins/_all-skins.min.css">
+
+    <!--[if lt IE 9]>
+    <script src="~/Scripts/excanvas.min.js"></script>
+    <script src="~/Scripts/html5shiv.min.js"></script>
+    <script src="~/Scripts/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="skin-blue sidebar-mini sidebar-collapse">
+    <div class="wrapper">
+        <div id="container" style="min-width:400px;height:400px"></div>
+        
+    </div>
+
+
+<script src="~/plugins/jQuery/jquery-1.12.4.min.js"></script>
+<script src="~/plugins/jQuery/jquery-migrate.min.js"></script>
+<script src="~/Scripts/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="~/plugins/fastclick/fastclick.js"></script>
+<script src="~/Scripts/app.min.js"></script>
+
+<script src="~/Scripts/highcharts.js"></script>
+
+
+    <script type="text/javascript">
+
+        var chart = Highcharts.chart('container', {
+            chart: {
+                type: 'spline'
+            },
+           
+            title: {
+                text: '累积氯预测'
+            },
+           
+            xAxis: {
+                type: 'linear',
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                title: {
+                    text: '累积氯接触值'
+                },
+                min: 0
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br>',
+                pointFormat: '{point.x:%e}: {point.y:.2f}'
+            },
+            plotOptions: {
+                spline: {
+                    //数据点标记
+                    marker: {
+                        enabled: true
+                    }
+                }
+            },
+            series: [{
+                
+                data: [
+                    [1, 10],
+                    [2, 11],
+                    [3, 13],
+                    [4, 14],
+                    [5, 15],
+                    [6, 17],
+                    [7, 19],
+                    [8, 21],
+                    [9, 25],
+                    [10, 28],
+                    [11, 33],
+                    [12, 38],
+                    [13, 50]
+                ],
+                color: '#f7a35c',
+
+            }]
+        });
+
+
+    </script>
+</body>
+</html>
