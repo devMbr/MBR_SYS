@@ -48,23 +48,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extend\Membrane.cs" />
     <Compile Include="Extend\User.cs" />
-    <Compile Include="Line.cs">
-      <DependentUpon>MBR.tt</DependentUpon>
-    </Compile>
     <Compile Include="MBR.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MBR.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="MBR.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MBR.tt</DependentUpon>
+    </Compile>
     <Compile Include="MBR.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MBR.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="MBRMembrane.cs">
-      <DependentUpon>MBR.tt</DependentUpon>
     </Compile>
     <Compile Include="Module.cs">
       <DependentUpon>MBR.tt</DependentUpon>
@@ -80,9 +78,6 @@
       <DependentUpon>MBR.tt</DependentUpon>
     </Compile>
     <Compile Include="SysLog.cs">
-      <DependentUpon>MBR.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Test.cs">
       <DependentUpon>MBR.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">

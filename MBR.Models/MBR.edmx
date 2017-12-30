@@ -4,42 +4,40 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MBRModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityType Name="Line">
-          <Key>
-            <PropertyRef Name="LineID" />
-          </Key>
-          <Property Name="LineID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LineName" Type="varchar" MaxLength="50" />
-          <Property Name="Note" Type="text" />
-          <Property Name="OrderBy" Type="int" />
-        </EntityType>
-        <EntityType Name="MBRMembrane">
-          <Key>
-            <PropertyRef Name="MBRID" />
-          </Key>
-          <Property Name="MBRID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LineID" Type="int" />
-          <Property Name="Manufacturer" Type="varchar" MaxLength="100" />
-          <Property Name="SpecificationModel" Type="varchar" MaxLength="50" />
-          <Property Name="Title" Type="varchar" MaxLength="50" />
-          <Property Name="ChangeDate" Type="datetime" Precision="0" />
-          <Property Name="StartDate" Type="datetime" Precision="0" />
-          <Property Name="EndDate" Type="datetime" Precision="0" />
-          <Property Name="Remark" Type="varchar" MaxLength="100" />
-          <Property Name="CreateBy" Type="int" />
-          <Property Name="CreateDate" Type="datetime" Precision="0" />
-          <Property Name="UpdateBy" Type="int" />
-          <Property Name="UpdateDate" Type="datetime" Precision="0" />
-        </EntityType>
+    <Schema Namespace="MBRModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="MBRModelStoreContainer">
+          <EntitySet Name="Module" EntityType="MBRModel.Store.Module" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="ModulePermission" EntityType="MBRModel.Store.ModulePermission" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="Role" EntityType="MBRModel.Store.Role" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="RoleUser" EntityType="MBRModel.Store.RoleUser" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="SysException" EntityType="MBRModel.Store.SysException" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="SysLog" EntityType="MBRModel.Store.SysLog" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="User" EntityType="MBRModel.Store.User" store:Type="Tables" Schema="mbr" />
+          <AssociationSet Name="module_ibfk_1" Association="MBRModel.Store.module_ibfk_1">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="Module1" EntitySet="Module" />
+          </AssociationSet>
+          <AssociationSet Name="modulepermission_ibfk_1" Association="MBRModel.Store.modulepermission_ibfk_1">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModulePermission" EntitySet="ModulePermission" />
+          </AssociationSet>
+          <AssociationSet Name="roleuser_ibfk_1" Association="MBRModel.Store.roleuser_ibfk_1">
+            <End Role="User" EntitySet="User" />
+            <End Role="RoleUser" EntitySet="RoleUser" />
+          </AssociationSet>
+          <AssociationSet Name="roleuser_ibfk_2" Association="MBRModel.Store.roleuser_ibfk_2">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="RoleUser" EntitySet="RoleUser" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Module">
           <Key>
             <PropertyRef Name="ModuleID" />
           </Key>
-          <Property Name="ModuleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ParentId" Type="int" />
-          <Property Name="FullName" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FullName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Code" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Location" Type="varchar" MaxLength="200" />
           <Property Name="Target" Type="varchar" MaxLength="50" />
           <Property Name="Icon" Type="varchar" MaxLength="200" />
@@ -53,7 +51,7 @@
           <Key>
             <PropertyRef Name="ModulePermissionID" />
           </Key>
-          <Property Name="ModulePermissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModulePermissionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Category" Type="int" />
           <Property Name="ObjectID" Type="int" />
           <Property Name="ModuleID" Type="int" />
@@ -62,7 +60,7 @@
           <Key>
             <PropertyRef Name="RoleID" />
           </Key>
-          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CompanyID" Type="int" />
           <Property Name="Category" Type="int" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
@@ -83,64 +81,43 @@
           <Key>
             <PropertyRef Name="SysExceptionID" />
           </Key>
-          <Property Name="SysExceptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SysExceptionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="HelpLink" Type="varchar" MaxLength="500" />
           <Property Name="Message" Type="varchar" MaxLength="500" />
           <Property Name="Source" Type="varchar" MaxLength="500" />
           <Property Name="StackTrace" Type="text" />
           <Property Name="TargetSite" Type="varchar" MaxLength="500" />
           <Property Name="Data" Type="varchar" MaxLength="500" />
-          <Property Name="CreateTime" Type="datetime" Precision="0" />
+          <Property Name="CreateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="SysLog">
           <Key>
             <PropertyRef Name="SysLogID" />
           </Key>
-          <Property Name="SysLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SysLogID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Operator" Type="varchar" MaxLength="50" />
           <Property Name="Message" Type="varchar" MaxLength="200" />
           <Property Name="Result" Type="varchar" MaxLength="20" />
           <Property Name="Type" Type="varchar" MaxLength="20" />
           <Property Name="Module" Type="varchar" MaxLength="20" />
-          <Property Name="CreateTime" Type="datetime" Precision="0" />
-        </EntityType>
-        <EntityType Name="Test">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="100" />
-          <Property Name="Age" Type="int" />
-          <Property Name="Address" Type="varchar" MaxLength="500" />
+          <Property Name="CreateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CompanyID" Type="int" />
-          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="RealName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="RealName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Enabled" Type="bool" />
           <Property Name="OrderBy" Type="int" />
           <Property Name="Remark" Type="varchar" MaxLength="200" />
         </EntityType>
-        <Association Name="FK_Reference_8">
-          <End Role="Line" Type="Self.Line" Multiplicity="0..1" />
-          <End Role="MBRMembrane" Type="Self.MBRMembrane" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Line">
-              <PropertyRef Name="LineID" />
-            </Principal>
-            <Dependent Role="MBRMembrane">
-              <PropertyRef Name="LineID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="module_ibfk_1">
-          <End Role="Module" Type="Self.Module" Multiplicity="0..1" />
-          <End Role="Module1" Type="Self.Module" Multiplicity="*" />
+          <End Role="Module" Type="MBRModel.Store.Module" Multiplicity="0..1" />
+          <End Role="Module1" Type="MBRModel.Store.Module" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="ModuleID" />
@@ -151,8 +128,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="modulepermission_ibfk_1">
-          <End Role="Module" Type="Self.Module" Multiplicity="0..1" />
-          <End Role="ModulePermission" Type="Self.ModulePermission" Multiplicity="*" />
+          <End Role="Module" Type="MBRModel.Store.Module" Multiplicity="0..1" />
+          <End Role="ModulePermission" Type="MBRModel.Store.ModulePermission" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="ModuleID" />
@@ -163,8 +140,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="roleuser_ibfk_1">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="RoleUser" Type="Self.RoleUser" Multiplicity="*" />
+          <End Role="User" Type="MBRModel.Store.User" Multiplicity="1" />
+          <End Role="RoleUser" Type="MBRModel.Store.RoleUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserID" />
@@ -175,8 +152,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="roleuser_ibfk_2">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="RoleUser" Type="Self.RoleUser" Multiplicity="*" />
+          <End Role="Role" Type="MBRModel.Store.Role" Multiplicity="1" />
+          <End Role="RoleUser" Type="MBRModel.Store.RoleUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="RoleID" />
@@ -186,38 +163,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MBRModelStoreContainer">
-          <EntitySet Name="Line" EntityType="Self.Line" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="MBRMembrane" EntityType="Self.MBRMembrane" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="Module" EntityType="Self.Module" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="ModulePermission" EntityType="Self.ModulePermission" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="Role" EntityType="Self.Role" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="RoleUser" EntityType="Self.RoleUser" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="SysException" EntityType="Self.SysException" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="SysLog" EntityType="Self.SysLog" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="Test" EntityType="Self.Test" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="User" EntityType="Self.User" Schema="mbr" store:Type="Tables" />
-          <AssociationSet Name="FK_Reference_8" Association="Self.FK_Reference_8">
-            <End Role="Line" EntitySet="Line" />
-            <End Role="MBRMembrane" EntitySet="MBRMembrane" />
-          </AssociationSet>
-          <AssociationSet Name="module_ibfk_1" Association="Self.module_ibfk_1">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="Module1" EntitySet="Module" />
-          </AssociationSet>
-          <AssociationSet Name="modulepermission_ibfk_1" Association="Self.modulepermission_ibfk_1">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="ModulePermission" EntitySet="ModulePermission" />
-          </AssociationSet>
-          <AssociationSet Name="roleuser_ibfk_1" Association="Self.roleuser_ibfk_1">
-            <End Role="User" EntitySet="User" />
-            <End Role="RoleUser" EntitySet="RoleUser" />
-          </AssociationSet>
-          <AssociationSet Name="roleuser_ibfk_2" Association="Self.roleuser_ibfk_2">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="RoleUser" EntitySet="RoleUser" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -240,13 +185,6 @@
           <AssociationSet Name="RoleUser" Association="MBRModel.RoleUser">
             <End Role="User" EntitySet="User" />
             <End Role="Role" EntitySet="Role" />
-          </AssociationSet>
-          <EntitySet Name="Test" EntityType="MBRModel.Test" />
-          <EntitySet Name="Line" EntityType="MBRModel.Line" />
-          <EntitySet Name="MBRMembrane" EntityType="MBRModel.MBRMembrane" />
-          <AssociationSet Name="FK_Reference_8" Association="MBRModel.FK_Reference_8">
-            <End Role="Line" EntitySet="Line" />
-            <End Role="MBRMembrane" EntitySet="MBRMembrane" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Module">
@@ -360,56 +298,6 @@
           <End Type="MBRModel.User" Role="User" Multiplicity="*" />
           <End Type="MBRModel.Role" Role="Role" Multiplicity="*" />
         </Association>
-        <EntityType Name="Test">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Age" Type="Int32" />
-          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Line">
-          <Key>
-            <PropertyRef Name="LineID" />
-          </Key>
-          <Property Name="LineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LineName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Note" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <Property Name="OrderBy" Type="Int32" />
-          <NavigationProperty Name="MBRMembrane" Relationship="MBRModel.FK_Reference_8" FromRole="Line" ToRole="MBRMembrane" />
-        </EntityType>
-        <EntityType Name="MBRMembrane">
-          <Key>
-            <PropertyRef Name="MBRID" />
-          </Key>
-          <Property Name="MBRID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LineID" Type="Int32" />
-          <Property Name="Manufacturer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="SpecificationModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ChangeDate" Type="DateTime" />
-          <Property Name="StartDate" Type="DateTime" />
-          <Property Name="EndDate" Type="DateTime" />
-          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CreateBy" Type="Int32" />
-          <Property Name="CreateDate" Type="DateTime" />
-          <Property Name="UpdateBy" Type="Int32" />
-          <Property Name="UpdateDate" Type="DateTime" />
-          <NavigationProperty Name="Line" Relationship="MBRModel.FK_Reference_8" FromRole="MBRMembrane" ToRole="Line" />
-        </EntityType>
-        <Association Name="FK_Reference_8">
-          <End Type="MBRModel.Line" Role="Line" Multiplicity="0..1" />
-          <End Type="MBRModel.MBRMembrane" Role="MBRMembrane" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Line">
-              <PropertyRef Name="LineID" />
-            </Principal>
-            <Dependent Role="MBRMembrane">
-              <PropertyRef Name="LineID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -507,45 +395,6 @@
               <ScalarProperty Name="UserID" ColumnName="UserID" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Test">
-            <EntityTypeMapping TypeName="MBRModel.Test">
-              <MappingFragment StoreEntitySet="Test">
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Line">
-            <EntityTypeMapping TypeName="MBRModel.Line">
-              <MappingFragment StoreEntitySet="Line">
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="LineName" ColumnName="LineName" />
-                <ScalarProperty Name="LineID" ColumnName="LineID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MBRMembrane">
-            <EntityTypeMapping TypeName="MBRModel.MBRMembrane">
-              <MappingFragment StoreEntitySet="MBRMembrane">
-                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="SpecificationModel" ColumnName="SpecificationModel" />
-                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
-                <ScalarProperty Name="LineID" ColumnName="LineID" />
-                <ScalarProperty Name="MBRID" ColumnName="MBRID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -563,7 +412,6 @@
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
-        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
@@ -589,10 +437,6 @@
           <ConnectorPoint PointX="4.25" PointY="6.3670556640625" />
           <ConnectorPoint PointX="5" PointY="6.3670556640625" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="MBRModel.Test" Width="1.5" PointX="0.75" PointY="8.75" />
-        <EntityTypeShape EntityType="MBRModel.Line" Width="1.5" PointX="7.375" PointY="5.875" />
-        <EntityTypeShape EntityType="MBRModel.MBRMembrane" Width="1.5" PointX="9.625" PointY="5" />
-        <AssociationConnector Association="MBRModel.FK_Reference_8" />
       </Diagram>
     </Diagrams>
   </Designer>

@@ -16,11 +16,6 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
-    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -129,8 +124,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LineController.cs" />
-    <Compile Include="Controllers\MempraneController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Core\BaseController.cs" />
@@ -143,7 +136,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\Models\AccountModels.cs" />
+    <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\UserService.cs" />
@@ -1381,16 +1374,6 @@
     <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\Role\Delete.cshtml" />
-    <Content Include="Views\Line\Index.cshtml" />
-    <Content Include="Views\Line\Details.cshtml" />
-    <Content Include="Views\Line\Create.cshtml" />
-    <Content Include="Views\Line\Edit.cshtml" />
-    <Content Include="Views\Line\Delete.cshtml" />
-    <Content Include="Views\Memprane\Index.cshtml" />
-    <Content Include="Views\Memprane\Details.cshtml" />
-    <Content Include="Views\Memprane\Create.cshtml" />
-    <Content Include="Views\Memprane\Edit.cshtml" />
-    <Content Include="Views\Memprane\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

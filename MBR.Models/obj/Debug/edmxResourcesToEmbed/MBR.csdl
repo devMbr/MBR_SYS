@@ -19,13 +19,6 @@
       <End Role="User" EntitySet="User" />
       <End Role="Role" EntitySet="Role" />
     </AssociationSet>
-    <EntitySet Name="Test" EntityType="MBRModel.Test" />
-    <EntitySet Name="Line" EntityType="MBRModel.Line" />
-    <EntitySet Name="MBRMembrane" EntityType="MBRModel.MBRMembrane" />
-    <AssociationSet Name="FK_Reference_8" Association="MBRModel.FK_Reference_8">
-      <End Role="Line" EntitySet="Line" />
-      <End Role="MBRMembrane" EntitySet="MBRMembrane" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Module">
     <Key>
@@ -137,55 +130,5 @@
   <Association Name="RoleUser">
     <End Type="MBRModel.User" Role="User" Multiplicity="*" />
     <End Type="MBRModel.Role" Role="Role" Multiplicity="*" />
-  </Association>
-  <EntityType Name="Test">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Age" Type="Int32" />
-    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="Line">
-    <Key>
-      <PropertyRef Name="LineID" />
-    </Key>
-    <Property Name="LineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="LineName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Note" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
-    <Property Name="OrderBy" Type="Int32" />
-    <NavigationProperty Name="MBRMembrane" Relationship="MBRModel.FK_Reference_8" FromRole="Line" ToRole="MBRMembrane" />
-  </EntityType>
-  <EntityType Name="MBRMembrane">
-    <Key>
-      <PropertyRef Name="MBRID" />
-    </Key>
-    <Property Name="MBRID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="LineID" Type="Int32" />
-    <Property Name="Manufacturer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="SpecificationModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="ChangeDate" Type="DateTime" />
-    <Property Name="StartDate" Type="DateTime" />
-    <Property Name="EndDate" Type="DateTime" />
-    <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="CreateBy" Type="Int32" />
-    <Property Name="CreateDate" Type="DateTime" />
-    <Property Name="UpdateBy" Type="Int32" />
-    <Property Name="UpdateDate" Type="DateTime" />
-    <NavigationProperty Name="Line" Relationship="MBRModel.FK_Reference_8" FromRole="MBRMembrane" ToRole="Line" />
-  </EntityType>
-  <Association Name="FK_Reference_8">
-    <End Type="MBRModel.Line" Role="Line" Multiplicity="0..1" />
-    <End Type="MBRModel.MBRMembrane" Role="MBRMembrane" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Line">
-        <PropertyRef Name="LineID" />
-      </Principal>
-      <Dependent Role="MBRMembrane">
-        <PropertyRef Name="LineID" />
-      </Dependent>
-    </ReferentialConstraint>
   </Association>
 </Schema>
