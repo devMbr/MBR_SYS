@@ -5,3 +5,6 @@ MBR.Models/obj/*
 MBR.Web/bin/*
 MBR.Models/bin/*
 *.cache
+MBR.Models/bin/Debug/MBR.Models.pdb
+MBR.Models/MBR.Models.csproj.user
+MBR.Web/Web.config
