@@ -1,83 +1,69 @@
-﻿@model MBR.Models.Role
-
+﻿@model MES.Models.Role
 @{
-    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Edit_Layout.cshtml";
 }
-
-<h2>Create</h2>
-
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Role</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CompanyID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CompanyID)
-            @Html.ValidationMessageFor(model => model.CompanyID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Category)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Category)
-            @Html.ValidationMessageFor(model => model.Category)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Code)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Code)
-            @Html.ValidationMessageFor(model => model.Code)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FullName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FullName)
-            @Html.ValidationMessageFor(model => model.FullName)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Status)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Status)
-            @Html.ValidationMessageFor(model => model.Status)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Note)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Note)
-            @Html.ValidationMessageFor(model => model.Note)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.OrderBy)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.OrderBy)
-            @Html.ValidationMessageFor(model => model.OrderBy)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+@section header{
+    <link href="~/plugins/jstree/themes/default/style.min.css" rel="stylesheet">
 }
+@using (Ajax.BeginForm("Create", "Role", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    OnSuccess = "OnSuccess",
+    OnFailure = "OnFailure",
+}, new { @class = "form-horizontal", id = "frmEdit" }))
+{
+    @Html.Hidden("ModuleIds", "")
+    @Html.Hidden("Status", 1)
+    <div class="form-body">
+        <div class="form-group">
+            @Html.LabelFor(m => m.FullName, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FullName)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Note, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.TextAreaFor(m => m.Note, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Note)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-3">角色权限</label>
+            <div class="col-xs-9">
+                <div id="treeModule"></div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <script src="~/plugins/jstree/jstree.min.js"></script>
+    <script>
+        $(function () {
+            var GetModuleTreeUrl = '@Url.Action("GetModuleTree","Module")';
+            $.getJSON(GetModuleTreeUrl, function (json) {
+                $('#treeModule').jstree({
+                    'plugins': ["checkbox"],
+                    "core": {
+                        "data": json
+                    }
+                });
+            });
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+        });
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+        function SetValues() {
+            var checkedArr = $('#treeModule').jstree().get_checked();
+            $('#ModuleIds').val(checkedArr);
+        }
+
+        function OnSuccess(data) {
+            parent.doSuccess(parent.$('#tbRole'), data.message);
+        }
+
+        function OnFailure(data) {
+            parent.doFailure(data.message);
+        }
+    </script>
 }

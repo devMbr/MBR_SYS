@@ -6,8 +6,10 @@ using MBR.Models;
 
 namespace MBR.Web.Services
 {
-    public class UserService : BaseService
+    public class UserService : BaseService<MBR.Models.User>
     {
+        public UserService() {  }
+        public UserService(MBREntities db) { this.db = db; }
         /// <summary>
         /// 登陆
         /// </summary>
@@ -89,6 +91,40 @@ namespace MBR.Web.Services
                             select t1;
 
                 return query.ToList();
+            }
+        }
+
+
+        internal bool ModifyPass(ref ValidationErrors errors, int UserID, string OldPassword, string NewPassword)
+        {
+            try
+            {
+                using (MBREntities db = new MBREntities())
+                {
+                    User entity = GetById(UserID);
+                    if (entity == null)
+                    {
+                        errors.Add("实体不存在");
+                        return false;
+                    }
+                    string MD5pwd = Encrypt.MD5(OldPassword);
+                    if (string.Equals(entity.Password, MD5pwd, StringComparison.OrdinalIgnoreCase))
+                    {
+                        entity.Password = Encrypt.MD5(NewPassword);
+                        return Edit(entity);
+                    }
+                    else
+                    {
+                        errors.Add("旧密码不正确");
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                errors.Add(ex.Message);
+                ExceptionHander.WriteException(ex);
+                return false;
             }
         }
     }
