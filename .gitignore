@@ -1,3 +1,4 @@
 
-MBR.Web/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+MBR.Web/obj/Debug
+MBR.Models/obj/Debug
 *.cache
