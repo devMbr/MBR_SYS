@@ -2,4 +2,6 @@
 MBR.Web/obj/Debug
 MBR.Models/obj/Debug
 .vs
+MBR.Web/bin
+MBR.Models/bin
 *.cache
