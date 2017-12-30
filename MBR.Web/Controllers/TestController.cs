@@ -21,11 +21,6 @@ namespace MBR.Web.Controllers
             return View(db.Test.ToList());
         }
 
-        public ActionResult Index2()
-        {
-            return View(db.Test.ToList());
-        }
-
         //
         // GET: /Test/Details/5
 
