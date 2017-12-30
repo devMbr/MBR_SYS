@@ -136,6 +136,7 @@
     <Compile Include="Core\Constants.cs" />
     <Compile Include="Core\DataPagingHelper.cs" />
     <Compile Include="Core\DataTablesHelp.cs" />
+    <Compile Include="Core\GridPager.cs" />
     <Compile Include="Core\LogHandler.cs" />
     <Compile Include="Core\LogonActionAttributeFilter.cs" />
     <Compile Include="Core\ModuleHelper.cs" />
@@ -144,6 +145,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.Designer.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\ModuleService.cs" />
@@ -1386,10 +1388,16 @@
     <Content Include="Views\Test\Create.cshtml" />
     <Content Include="Views\Test\Edit.cshtml" />
     <Content Include="Views\Test\Delete.cshtml" />
-    <Content Include="Views\Test\Index2.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\ModifyPass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
