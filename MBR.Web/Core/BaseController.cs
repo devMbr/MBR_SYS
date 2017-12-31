@@ -32,7 +32,7 @@ namespace MBR.Web
                 {
                     UserID = 1,
                     UserName = "admin",
-                    RealName = "管理员",
+                    RealName = "管理员"
                 };
                 return System.Web.HttpContext.Current.Session[Constants.SESSION_USERID] as User;
             }

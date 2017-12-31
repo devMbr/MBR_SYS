@@ -1,7 +1,7 @@
-﻿@model MES.Models.User
+﻿@model MBR.Models.User
 @{
     Layout = "~/Views/Shared/_Edit_Layout.cshtml";
-    var RoleList = ViewBag.Roles as IEnumerable<MES.Models.Role>;
+    var RoleList = ViewBag.Roles as IEnumerable<MBR.Models.Role>;
 }
 @using (Ajax.BeginForm("Edit", "User", null, new AjaxOptions
 {
@@ -14,16 +14,16 @@
     @Html.HiddenFor(m => m.RoleIds)
     <div class="form-body">
         <div class="form-group">
-            @Html.LabelFor(m => m.USERNAME, new { @class = "control-label col-md-3" })
+            @Html.LabelFor(m => m.UserName, new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-                @Html.TextBoxFor(m => m.USERNAME, new { @class = "form-control disalbed", @readonly = "true" })
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control disalbed", @readonly = "true" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.REALNAME, new { @class = "control-label col-md-3" })
+            @Html.LabelFor(m => m.RealName, new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-                @Html.TextBoxFor(m => m.REALNAME, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.REALNAME)
+                @Html.TextBoxFor(m => m.RealName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.RealName)
             </div>
         </div>
         <div class="form-group">

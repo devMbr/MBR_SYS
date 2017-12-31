@@ -21,6 +21,64 @@ namespace MBR.Web.Controllers
             return View(db.Test.ToList());
         }
 
+        public JsonResult GetPermeable()
+        {
+            List<Test> list = db.Test.ToList();
+            list.Clear();
+            Dictionary<string,List<Test>> dic = new Dictionary<string, List<Test>>();
+            if (list == null ||list.Count==0)
+            {
+                Random rnd = new Random();
+                for (int i = 0; i < 15; i++)
+                {
+                    Test t = new Test();
+                    t.Age = i+1;
+                    
+                    int number = rnd.Next(i, 80);
+                    t.ID = number;
+                    list.Add(t);
+                }
+                dic.Add("after",list);
+
+                //之前
+                List<Test> blist = new List<Test>();
+                for (int i = 0; i < 15; i++)
+                {
+                    Test t = new Test();
+                    t.Age = i + 1;
+
+                    int number = rnd.Next(i, 80);
+                    t.ID = number;
+                    blist.Add(t);
+                }
+                dic.Add("befer", blist);
+
+            }
+            return Json(dic, JsonRequestBehavior.AllowGet); 
+        }
+
+        public JsonResult GetChlorinValue()
+        {
+            List<Test> list = db.Test.ToList();
+
+            list.Clear();
+            if (list == null || list.Count == 0)
+            {
+                Random rnd = new Random();
+                for (int i = 0; i < 15; i++)
+                {
+                    Test t = new Test();
+                    t.Age = i;
+                    
+                    int number = rnd.Next(i, 100);
+                    t.ID = number;
+                    list.Add(t);
+                }
+
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
         //
         // GET: /Test/Details/5
 

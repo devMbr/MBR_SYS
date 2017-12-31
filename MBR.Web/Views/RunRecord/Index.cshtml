@@ -1,0 +1,142 @@
+﻿@using MBR.Models
+@using MBR.Web
+@{
+    Layout = "~/Views/Shared/_Index_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-body">
+            
+                <table id="tbRunRecord" class="table table-striped table-bordered table-hover dataTable">
+                    <thead>
+                        <tr>
+                            <th colspan="13">
+                                运行记录
+                            </th>
+                        </tr>
+                        <tr>
+                            <th rowspan="2">
+                                时间
+                            </th>
+                            <th>
+                                产水流量
+                            </th>
+                            <th>
+                                产水压力
+                            </th>
+                            <th>
+                                单池膜擦洗气量
+                            </th>
+                            <th>
+                                污泥浓度
+                            </th>
+                            <th>
+                                溶解氧
+                            </th>
+                            <th>
+                                跨膜压差
+                            </th>
+                            <th>
+                                透水率
+                            </th>
+                            <th>
+                                温度教正透水率
+                            </th>
+                            <th>
+                                气水比
+                            </th>
+                            <th>
+                                水温
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                m3/h
+                            </th>
+                            <th>
+                                kPa
+                            </th>
+                            <th>
+                                m3/h
+                            </th>
+                            <th>
+                                mg/L
+                            </th>
+                            <th>
+                                mg/L
+                            </th>
+                            <th>
+                                kPa
+                            </th>
+                            <th>
+                                LMH/bar
+                            </th>
+                            <th>
+                                LMH/bar
+                            </th>
+                            <th>
+                                
+                            </th>
+                            <th>
+                                
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        var GetListUrl = '@Url.Action("GetList")';
+    </script>
+    <script type="text/javascript">
+        $(function () {
+
+            MES.init();
+
+            var table = $('#tbRunRecord').DataTable({
+                "searching": true,
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": GetListUrl,
+                    "type": "POST",
+                    "data": function (d) {
+                        //添加额外的参数传给服务器
+                        d.beginDate = $("#beginDate").val(); //开始时间
+                        d.endDate = $("#endDate").val(); //结束时间
+                    }
+                },
+                "columns": [
+                    { "data": "RunDate" },
+                    { "data": "Column_4" },
+                    { "data": "Column_5" },
+                    { "data": "Column_6" },
+                    { "data": "Column_7" },
+                    { "data": "Column_8" },
+                    { "data": "Column_9" },
+                    { "data": "Column_10" },
+                    { "data": "Column_11" },
+                    { "data": "Column_12" },
+                    { "data": "Column_13" }
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": "RunDate",
+                    "render": function (data, type, full, meta) {
+                        return MES.formatDateTime(data);
+                    }
+                }]
+
+            });
+
+            $("#searchsubmit").bind("click", function () { //点击按钮 触发table重新请求服务器
+                $("#tbRunRecord").dataTable().fnDraw(false);
+            });
+        });
+
+    </script>
+}
