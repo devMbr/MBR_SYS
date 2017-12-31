@@ -25,12 +25,22 @@ namespace MBR.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<DATADICTIONARY> DATADICTIONARY { get; set; }
+        public DbSet<DATADICTIONARYDETAIL> DATADICTIONARYDETAIL { get; set; }
+        public DbSet<ForecastAccumulativeChlorine> ForecastAccumulativeChlorine { get; set; }
+        public DbSet<ForecastPermeableRate> ForecastPermeableRate { get; set; }
+        public DbSet<Line> Line { get; set; }
+        public DbSet<MBRMembrane> MBRMembrane { get; set; }
+        public DbSet<MembraneAlert> MembraneAlert { get; set; }
         public DbSet<Module> Module { get; set; }
         public DbSet<ModulePermission> ModulePermission { get; set; }
+        public DbSet<Param> Param { get; set; }
+        public DbSet<PermeableRrateAlert> PermeableRrateAlert { get; set; }
         public DbSet<Role> Role { get; set; }
+        public DbSet<RunRecord> RunRecord { get; set; }
         public DbSet<SysException> SysException { get; set; }
         public DbSet<SysLog> SysLog { get; set; }
-        public DbSet<User> User { get; set; }
         public DbSet<Test> Test { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }

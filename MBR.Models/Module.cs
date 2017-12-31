@@ -16,8 +16,8 @@ namespace MBR.Models
     {
         public Module()
         {
-            this.Module1 = new HashSet<Module>();
             this.ModulePermission = new HashSet<ModulePermission>();
+            this.Module1 = new HashSet<Module>();
         }
     
         public int ModuleID { get; set; }
@@ -33,9 +33,9 @@ namespace MBR.Models
         public Nullable<int> Level { get; set; }
         public Nullable<bool> Isexpand { get; set; }
     
+        public virtual ICollection<ModulePermission> ModulePermission { get; set; }
         public virtual ICollection<Module> Module1 { get; set; }
         public virtual Module Module2 { get; set; }
-        public virtual ICollection<ModulePermission> ModulePermission { get; set; }
     }
     
 }

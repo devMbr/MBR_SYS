@@ -12,22 +12,16 @@ using System.Collections.Generic;
 
 namespace MBR.Models
 {
-    public partial class User
+    public partial class PermeableRrateAlert
     {
-        public User()
-        {
-            this.Role = new HashSet<Role>();
-        }
-    
-        public int UserID { get; set; }
-        public string UserName { get; set; }
-        public string RealName { get; set; }
-        public string Password { get; set; }
-        public Nullable<bool> Enabled { get; set; }
-        public Nullable<int> OrderBy { get; set; }
-        public string Remark { get; set; }
-    
-        public virtual ICollection<Role> Role { get; set; }
+        public int PermeableRrateAlertID { get; set; }
+        public Nullable<double> OnlineMin { get; set; }
+        public Nullable<double> OnlineMax { get; set; }
+        public Nullable<double> OfflineMin { get; set; }
+        public Nullable<double> OfflineMax { get; set; }
+        public Nullable<double> ChangeMin { get; set; }
+        public Nullable<double> ChangeMax { get; set; }
+        public Nullable<double> DurationMax { get; set; }
     }
     
 }

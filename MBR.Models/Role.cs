@@ -20,7 +20,6 @@ namespace MBR.Models
         }
     
         public int RoleID { get; set; }
-        public Nullable<int> CompanyID { get; set; }
         public Nullable<int> Category { get; set; }
         public string Code { get; set; }
         public string FullName { get; set; }

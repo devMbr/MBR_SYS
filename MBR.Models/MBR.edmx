@@ -4,15 +4,164 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MBRModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="MBRModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="MBRModelStoreContainer">
+          <EntitySet Name="DATADICTIONARY" EntityType="MBRModel.Store.DATADICTIONARY" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="DATADICTIONARYDETAIL" EntityType="MBRModel.Store.DATADICTIONARYDETAIL" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="ForecastAccumulativeChlorine" EntityType="MBRModel.Store.ForecastAccumulativeChlorine" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="ForecastPermeableRate" EntityType="MBRModel.Store.ForecastPermeableRate" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="Line" EntityType="MBRModel.Store.Line" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="MBRMembrane" EntityType="MBRModel.Store.MBRMembrane" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="MembraneAlert" EntityType="MBRModel.Store.MembraneAlert" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="Module" EntityType="MBRModel.Store.Module" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="ModulePermission" EntityType="MBRModel.Store.ModulePermission" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="Param" EntityType="MBRModel.Store.Param" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="PermeableRrateAlert" EntityType="MBRModel.Store.PermeableRrateAlert" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="Role" EntityType="MBRModel.Store.Role" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="RoleUser" EntityType="MBRModel.Store.RoleUser" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="RunRecord" EntityType="MBRModel.Store.RunRecord" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="SysException" EntityType="MBRModel.Store.SysException" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="SysLog" EntityType="MBRModel.Store.SysLog" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="Test" EntityType="MBRModel.Store.Test" store:Type="Tables" Schema="mbr" />
+          <EntitySet Name="User" EntityType="MBRModel.Store.User" store:Type="Tables" Schema="mbr" />
+          <AssociationSet Name="FK_Reference_11" Association="MBRModel.Store.FK_Reference_11">
+            <End Role="MBRMembrane" EntitySet="MBRMembrane" />
+            <End Role="ForecastPermeableRate" EntitySet="ForecastPermeableRate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_12" Association="MBRModel.Store.FK_Reference_12">
+            <End Role="MBRMembrane" EntitySet="MBRMembrane" />
+            <End Role="ForecastAccumulativeChlorine" EntitySet="ForecastAccumulativeChlorine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_22" Association="MBRModel.Store.FK_Reference_22">
+            <End Role="User" EntitySet="User" />
+            <End Role="RoleUser" EntitySet="RoleUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_53" Association="MBRModel.Store.FK_Reference_53">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="RoleUser" EntitySet="RoleUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_55" Association="MBRModel.Store.FK_Reference_55">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModulePermission" EntitySet="ModulePermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_57" Association="MBRModel.Store.FK_Reference_57">
+            <End Role="DATADICTIONARY" EntitySet="DATADICTIONARY" />
+            <End Role="DATADICTIONARY1" EntitySet="DATADICTIONARY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_58" Association="MBRModel.Store.FK_Reference_58">
+            <End Role="DATADICTIONARY" EntitySet="DATADICTIONARY" />
+            <End Role="DATADICTIONARYDETAIL" EntitySet="DATADICTIONARYDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_59" Association="MBRModel.Store.FK_Reference_59">
+            <End Role="DATADICTIONARYDETAIL" EntitySet="DATADICTIONARYDETAIL" />
+            <End Role="DATADICTIONARYDETAIL1" EntitySet="DATADICTIONARYDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_60" Association="MBRModel.Store.FK_Reference_60">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="Module1" EntitySet="Module" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_8" Association="MBRModel.Store.FK_Reference_8">
+            <End Role="Line" EntitySet="Line" />
+            <End Role="MBRMembrane" EntitySet="MBRMembrane" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_9" Association="MBRModel.Store.FK_Reference_9">
+            <End Role="Line" EntitySet="Line" />
+            <End Role="RunRecord" EntitySet="RunRecord" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="DATADICTIONARY">
+          <Key>
+            <PropertyRef Name="DATADICTIONARYID" />
+          </Key>
+          <Property Name="DATADICTIONARYID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="PARENTID" Type="int" />
+          <Property Name="ISTREE" Type="int" />
+          <Property Name="CATEGORY" Type="varchar" MaxLength="50" />
+          <Property Name="CODE" Type="varchar" MaxLength="50" />
+          <Property Name="FULLNAME" Type="varchar" MaxLength="50" />
+          <Property Name="ENABLED" Type="int" />
+          <Property Name="SORTCODE" Type="int" />
+          <Property Name="DELETEMARK" Type="int" />
+          <Property Name="REMARK" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="DATADICTIONARYDETAIL">
+          <Key>
+            <PropertyRef Name="DATADICTIONARYDETAILID" />
+          </Key>
+          <Property Name="DATADICTIONARYDETAILID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DATADICTIONARYID" Type="int" />
+          <Property Name="PARENTID" Type="int" />
+          <Property Name="CODE" Type="varchar" MaxLength="50" />
+          <Property Name="FULLNAME" Type="varchar" MaxLength="50" />
+          <Property Name="REMARK" Type="varchar" MaxLength="200" />
+          <Property Name="ENABLED" Type="int" />
+          <Property Name="SORTCODE" Type="int" />
+          <Property Name="DELETEMARK" Type="int" />
+        </EntityType>
+        <EntityType Name="ForecastAccumulativeChlorine">
+          <Key>
+            <PropertyRef Name="ForecastAccumulativeChlorineID" />
+          </Key>
+          <Property Name="ForecastAccumulativeChlorineID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MBRID" Type="int" />
+          <Property Name="Formula" Type="varchar" MaxLength="100" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ForecastPermeableRate">
+          <Key>
+            <PropertyRef Name="ForecastPermeableRateID" />
+          </Key>
+          <Property Name="ForecastPermeableRateID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MBRID" Type="int" />
+          <Property Name="FormulaBefore" Type="varchar" MaxLength="100" />
+          <Property Name="FormulaAfter" Type="varchar" MaxLength="100" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Line">
+          <Key>
+            <PropertyRef Name="LineID" />
+          </Key>
+          <Property Name="LineID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LineName" Type="varchar" MaxLength="50" />
+          <Property Name="Note" Type="varchar" MaxLength="100" />
+          <Property Name="OrderBy" Type="int" />
+        </EntityType>
+        <EntityType Name="MBRMembrane">
+          <Key>
+            <PropertyRef Name="MBRID" />
+          </Key>
+          <Property Name="MBRID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LineID" Type="int" />
+          <Property Name="Manufacturer" Type="varchar" MaxLength="100" />
+          <Property Name="SpecificationModel" Type="varchar" MaxLength="50" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="ChangeDate" Type="datetime" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Remark" Type="varchar" MaxLength="100" />
+          <Property Name="CreateBy" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UpdateBy" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MembraneAlert">
+          <Key>
+            <PropertyRef Name="MembraneAlertID" />
+          </Key>
+          <Property Name="MembraneAlertID" Type="int" Nullable="false" />
+          <Property Name="PermeableRateMin" Type="double" />
+          <Property Name="DurationMax" Type="double" />
+          <Property Name="AccumulativeChlorine" Type="double" />
+        </EntityType>
         <EntityType Name="Module">
           <Key>
             <PropertyRef Name="ModuleID" />
           </Key>
-          <Property Name="ModuleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ParentId" Type="int" />
-          <Property Name="FullName" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FullName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Code" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Location" Type="varchar" MaxLength="200" />
           <Property Name="Target" Type="varchar" MaxLength="50" />
           <Property Name="Icon" Type="varchar" MaxLength="200" />
@@ -26,17 +175,46 @@
           <Key>
             <PropertyRef Name="ModulePermissionID" />
           </Key>
-          <Property Name="ModulePermissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModulePermissionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Category" Type="int" />
           <Property Name="ObjectID" Type="int" />
           <Property Name="ModuleID" Type="int" />
+        </EntityType>
+        <EntityType Name="Param">
+          <Key>
+            <PropertyRef Name="ParamID" />
+          </Key>
+          <Property Name="ParamID" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Unit" Type="varchar" MaxLength="10" />
+          <Property Name="Format" Type="varchar" MaxLength="10" />
+          <Property Name="OrderBy" Type="int" />
+          <Property Name="IsCurve" Type="bit" />
+          <Property Name="RreshInterval" Type="varchar" MaxLength="100" />
+          <Property Name="ScaleYMax" Type="double" />
+          <Property Name="ScaleYMin" Type="double" />
+          <Property Name="ParamMax" Type="double" />
+          <Property Name="ParamMin" Type="double" />
+          <Property Name="Remark" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PermeableRrateAlert">
+          <Key>
+            <PropertyRef Name="PermeableRrateAlertID" />
+          </Key>
+          <Property Name="PermeableRrateAlertID" Type="int" Nullable="false" />
+          <Property Name="OnlineMin" Type="double" />
+          <Property Name="OnlineMax" Type="double" />
+          <Property Name="OfflineMin" Type="double" />
+          <Property Name="OfflineMax" Type="double" />
+          <Property Name="ChangeMin" Type="double" />
+          <Property Name="ChangeMax" Type="double" />
+          <Property Name="DurationMax" Type="double" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="RoleID" />
           </Key>
-          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CompanyID" Type="int" />
+          <Property Name="RoleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Category" Type="int" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
           <Property Name="FullName" Type="varchar" MaxLength="50" />
@@ -52,30 +230,55 @@
           <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="RunRecord">
+          <Key>
+            <PropertyRef Name="RunRecordID" />
+          </Key>
+          <Property Name="RunRecordID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LineID" Type="int" />
+          <Property Name="RunDate" Type="datetime" />
+          <Property Name="Column_4" Type="double" />
+          <Property Name="Column_5" Type="double" />
+          <Property Name="Column_6" Type="double" />
+          <Property Name="Column_7" Type="double" />
+          <Property Name="Column_8" Type="double" />
+          <Property Name="Column_9" Type="double" />
+          <Property Name="Column_10" Type="double" />
+          <Property Name="Column_11" Type="double" />
+          <Property Name="Column_12" Type="double" />
+          <Property Name="Column_13" Type="double" />
+          <Property Name="Column_14" Type="double" />
+          <Property Name="Column_15" Type="double" />
+          <Property Name="Column_16" Type="double" />
+          <Property Name="Column_17" Type="double" />
+          <Property Name="Column_18" Type="double" />
+          <Property Name="Column_19" Type="double" />
+          <Property Name="Column_20" Type="double" />
+        </EntityType>
         <EntityType Name="SysException">
           <Key>
             <PropertyRef Name="SysExceptionID" />
           </Key>
-          <Property Name="SysExceptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SysExceptionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="HelpLink" Type="varchar" MaxLength="500" />
           <Property Name="Message" Type="varchar" MaxLength="500" />
           <Property Name="Source" Type="varchar" MaxLength="500" />
           <Property Name="StackTrace" Type="text" />
           <Property Name="TargetSite" Type="varchar" MaxLength="500" />
           <Property Name="Data" Type="varchar" MaxLength="500" />
-          <Property Name="CreateTime" Type="datetime" Precision="0" />
+          <Property Name="CreateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="SysLog">
           <Key>
             <PropertyRef Name="SysLogID" />
           </Key>
-          <Property Name="SysLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SysLogID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Operator" Type="varchar" MaxLength="50" />
           <Property Name="Message" Type="varchar" MaxLength="200" />
           <Property Name="Result" Type="varchar" MaxLength="20" />
           <Property Name="Type" Type="varchar" MaxLength="20" />
           <Property Name="Module" Type="varchar" MaxLength="20" />
-          <Property Name="CreateTime" Type="datetime" Precision="0" />
+          <Property Name="CreateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="Test">
           <Key>
@@ -90,42 +293,41 @@
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CompanyID" Type="int" />
-          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="RealName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="RealName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Enabled" Type="bool" />
           <Property Name="OrderBy" Type="int" />
           <Property Name="Remark" Type="varchar" MaxLength="200" />
         </EntityType>
-        <Association Name="module_ibfk_1">
-          <End Role="Module" Type="Self.Module" Multiplicity="0..1" />
-          <End Role="Module1" Type="Self.Module" Multiplicity="*" />
+        <Association Name="FK_Reference_11">
+          <End Role="MBRMembrane" Type="MBRModel.Store.MBRMembrane" Multiplicity="0..1" />
+          <End Role="ForecastPermeableRate" Type="MBRModel.Store.ForecastPermeableRate" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Module">
-              <PropertyRef Name="ModuleID" />
+            <Principal Role="MBRMembrane">
+              <PropertyRef Name="MBRID" />
             </Principal>
-            <Dependent Role="Module1">
-              <PropertyRef Name="ParentId" />
+            <Dependent Role="ForecastPermeableRate">
+              <PropertyRef Name="MBRID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="modulepermission_ibfk_1">
-          <End Role="Module" Type="Self.Module" Multiplicity="0..1" />
-          <End Role="ModulePermission" Type="Self.ModulePermission" Multiplicity="*" />
+        <Association Name="FK_Reference_12">
+          <End Role="MBRMembrane" Type="MBRModel.Store.MBRMembrane" Multiplicity="0..1" />
+          <End Role="ForecastAccumulativeChlorine" Type="MBRModel.Store.ForecastAccumulativeChlorine" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Module">
-              <PropertyRef Name="ModuleID" />
+            <Principal Role="MBRMembrane">
+              <PropertyRef Name="MBRID" />
             </Principal>
-            <Dependent Role="ModulePermission">
-              <PropertyRef Name="ModuleID" />
+            <Dependent Role="ForecastAccumulativeChlorine">
+              <PropertyRef Name="MBRID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="roleuser_ibfk_1">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="RoleUser" Type="Self.RoleUser" Multiplicity="*" />
+        <Association Name="FK_Reference_22">
+          <End Role="User" Type="MBRModel.Store.User" Multiplicity="1" />
+          <End Role="RoleUser" Type="MBRModel.Store.RoleUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserID" />
@@ -135,9 +337,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="roleuser_ibfk_2">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="RoleUser" Type="Self.RoleUser" Multiplicity="*" />
+        <Association Name="FK_Reference_53">
+          <End Role="Role" Type="MBRModel.Store.Role" Multiplicity="1" />
+          <End Role="RoleUser" Type="MBRModel.Store.RoleUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="RoleID" />
@@ -147,57 +349,251 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MBRModelStoreContainer">
-          <EntitySet Name="Module" EntityType="Self.Module" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="ModulePermission" EntityType="Self.ModulePermission" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="Role" EntityType="Self.Role" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="RoleUser" EntityType="Self.RoleUser" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="SysException" EntityType="Self.SysException" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="SysLog" EntityType="Self.SysLog" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="Test" EntityType="Self.Test" Schema="mbr" store:Type="Tables" />
-          <EntitySet Name="User" EntityType="Self.User" Schema="mbr" store:Type="Tables" />
-          <AssociationSet Name="module_ibfk_1" Association="Self.module_ibfk_1">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="Module1" EntitySet="Module" />
-          </AssociationSet>
-          <AssociationSet Name="modulepermission_ibfk_1" Association="Self.modulepermission_ibfk_1">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="ModulePermission" EntitySet="ModulePermission" />
-          </AssociationSet>
-          <AssociationSet Name="roleuser_ibfk_1" Association="Self.roleuser_ibfk_1">
-            <End Role="User" EntitySet="User" />
-            <End Role="RoleUser" EntitySet="RoleUser" />
-          </AssociationSet>
-          <AssociationSet Name="roleuser_ibfk_2" Association="Self.roleuser_ibfk_2">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="RoleUser" EntitySet="RoleUser" />
-          </AssociationSet>
-        </EntityContainer>
+        <Association Name="FK_Reference_55">
+          <End Role="Module" Type="MBRModel.Store.Module" Multiplicity="0..1" />
+          <End Role="ModulePermission" Type="MBRModel.Store.ModulePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="ModulePermission">
+              <PropertyRef Name="ModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reference_57">
+          <End Role="DATADICTIONARY" Type="MBRModel.Store.DATADICTIONARY" Multiplicity="0..1" />
+          <End Role="DATADICTIONARY1" Type="MBRModel.Store.DATADICTIONARY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATADICTIONARY">
+              <PropertyRef Name="DATADICTIONARYID" />
+            </Principal>
+            <Dependent Role="DATADICTIONARY1">
+              <PropertyRef Name="PARENTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reference_58">
+          <End Role="DATADICTIONARY" Type="MBRModel.Store.DATADICTIONARY" Multiplicity="0..1" />
+          <End Role="DATADICTIONARYDETAIL" Type="MBRModel.Store.DATADICTIONARYDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATADICTIONARY">
+              <PropertyRef Name="DATADICTIONARYID" />
+            </Principal>
+            <Dependent Role="DATADICTIONARYDETAIL">
+              <PropertyRef Name="DATADICTIONARYID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reference_59">
+          <End Role="DATADICTIONARYDETAIL" Type="MBRModel.Store.DATADICTIONARYDETAIL" Multiplicity="0..1" />
+          <End Role="DATADICTIONARYDETAIL1" Type="MBRModel.Store.DATADICTIONARYDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATADICTIONARYDETAIL">
+              <PropertyRef Name="DATADICTIONARYDETAILID" />
+            </Principal>
+            <Dependent Role="DATADICTIONARYDETAIL1">
+              <PropertyRef Name="PARENTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reference_60">
+          <End Role="Module" Type="MBRModel.Store.Module" Multiplicity="0..1" />
+          <End Role="Module1" Type="MBRModel.Store.Module" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="Module1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reference_8">
+          <End Role="Line" Type="MBRModel.Store.Line" Multiplicity="0..1" />
+          <End Role="MBRMembrane" Type="MBRModel.Store.MBRMembrane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Line">
+              <PropertyRef Name="LineID" />
+            </Principal>
+            <Dependent Role="MBRMembrane">
+              <PropertyRef Name="LineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reference_9">
+          <End Role="Line" Type="MBRModel.Store.Line" Multiplicity="0..1" />
+          <End Role="RunRecord" Type="MBRModel.Store.RunRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Line">
+              <PropertyRef Name="LineID" />
+            </Principal>
+            <Dependent Role="RunRecord">
+              <PropertyRef Name="LineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MBRModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="MBREntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DATADICTIONARY" EntityType="MBRModel.DATADICTIONARY" />
+          <EntitySet Name="DATADICTIONARYDETAIL" EntityType="MBRModel.DATADICTIONARYDETAIL" />
+          <EntitySet Name="ForecastAccumulativeChlorine" EntityType="MBRModel.ForecastAccumulativeChlorine" />
+          <EntitySet Name="ForecastPermeableRate" EntityType="MBRModel.ForecastPermeableRate" />
+          <EntitySet Name="Line" EntityType="MBRModel.Line" />
+          <EntitySet Name="MBRMembrane" EntityType="MBRModel.MBRMembrane" />
+          <EntitySet Name="MembraneAlert" EntityType="MBRModel.MembraneAlert" />
           <EntitySet Name="Module" EntityType="MBRModel.Module" />
           <EntitySet Name="ModulePermission" EntityType="MBRModel.ModulePermission" />
+          <EntitySet Name="Param" EntityType="MBRModel.Param" />
+          <EntitySet Name="PermeableRrateAlert" EntityType="MBRModel.PermeableRrateAlert" />
           <EntitySet Name="Role" EntityType="MBRModel.Role" />
+          <EntitySet Name="RunRecord" EntityType="MBRModel.RunRecord" />
           <EntitySet Name="SysException" EntityType="MBRModel.SysException" />
           <EntitySet Name="SysLog" EntityType="MBRModel.SysLog" />
+          <EntitySet Name="Test" EntityType="MBRModel.Test" />
           <EntitySet Name="User" EntityType="MBRModel.User" />
-          <AssociationSet Name="module_ibfk_1" Association="MBRModel.module_ibfk_1">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="Module1" EntitySet="Module" />
+          <AssociationSet Name="FK_Reference_57" Association="MBRModel.FK_Reference_57">
+            <End Role="DATADICTIONARY" EntitySet="DATADICTIONARY" />
+            <End Role="DATADICTIONARY1" EntitySet="DATADICTIONARY" />
           </AssociationSet>
-          <AssociationSet Name="modulepermission_ibfk_1" Association="MBRModel.modulepermission_ibfk_1">
+          <AssociationSet Name="FK_Reference_58" Association="MBRModel.FK_Reference_58">
+            <End Role="DATADICTIONARY" EntitySet="DATADICTIONARY" />
+            <End Role="DATADICTIONARYDETAIL" EntitySet="DATADICTIONARYDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_59" Association="MBRModel.FK_Reference_59">
+            <End Role="DATADICTIONARYDETAIL" EntitySet="DATADICTIONARYDETAIL" />
+            <End Role="DATADICTIONARYDETAIL1" EntitySet="DATADICTIONARYDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_12" Association="MBRModel.FK_Reference_12">
+            <End Role="MBRMembrane" EntitySet="MBRMembrane" />
+            <End Role="ForecastAccumulativeChlorine" EntitySet="ForecastAccumulativeChlorine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_11" Association="MBRModel.FK_Reference_11">
+            <End Role="MBRMembrane" EntitySet="MBRMembrane" />
+            <End Role="ForecastPermeableRate" EntitySet="ForecastPermeableRate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_8" Association="MBRModel.FK_Reference_8">
+            <End Role="Line" EntitySet="Line" />
+            <End Role="MBRMembrane" EntitySet="MBRMembrane" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_9" Association="MBRModel.FK_Reference_9">
+            <End Role="Line" EntitySet="Line" />
+            <End Role="RunRecord" EntitySet="RunRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_55" Association="MBRModel.FK_Reference_55">
             <End Role="Module" EntitySet="Module" />
             <End Role="ModulePermission" EntitySet="ModulePermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reference_60" Association="MBRModel.FK_Reference_60">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="Module1" EntitySet="Module" />
           </AssociationSet>
           <AssociationSet Name="RoleUser" Association="MBRModel.RoleUser">
             <End Role="User" EntitySet="User" />
             <End Role="Role" EntitySet="Role" />
           </AssociationSet>
-          <EntitySet Name="Test" EntityType="MBRModel.Test" />
         </EntityContainer>
+        <EntityType Name="DATADICTIONARY">
+          <Key>
+            <PropertyRef Name="DATADICTIONARYID" />
+          </Key>
+          <Property Type="Int32" Name="DATADICTIONARYID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CompanyID" />
+          <Property Type="Int32" Name="PARENTID" />
+          <Property Type="Int32" Name="ISTREE" />
+          <Property Type="String" Name="CATEGORY" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CODE" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FULLNAME" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ENABLED" />
+          <Property Type="Int32" Name="SORTCODE" />
+          <Property Type="Int32" Name="DELETEMARK" />
+          <Property Type="String" Name="REMARK" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DATADICTIONARY1" Relationship="MBRModel.FK_Reference_57" FromRole="DATADICTIONARY" ToRole="DATADICTIONARY1" />
+          <NavigationProperty Name="DATADICTIONARY2" Relationship="MBRModel.FK_Reference_57" FromRole="DATADICTIONARY1" ToRole="DATADICTIONARY" />
+          <NavigationProperty Name="DATADICTIONARYDETAIL" Relationship="MBRModel.FK_Reference_58" FromRole="DATADICTIONARY" ToRole="DATADICTIONARYDETAIL" />
+        </EntityType>
+        <EntityType Name="DATADICTIONARYDETAIL">
+          <Key>
+            <PropertyRef Name="DATADICTIONARYDETAILID" />
+          </Key>
+          <Property Type="Int32" Name="DATADICTIONARYDETAILID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="DATADICTIONARYID" />
+          <Property Type="Int32" Name="PARENTID" />
+          <Property Type="String" Name="CODE" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FULLNAME" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="REMARK" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ENABLED" />
+          <Property Type="Int32" Name="SORTCODE" />
+          <Property Type="Int32" Name="DELETEMARK" />
+          <NavigationProperty Name="DATADICTIONARY" Relationship="MBRModel.FK_Reference_58" FromRole="DATADICTIONARYDETAIL" ToRole="DATADICTIONARY" />
+          <NavigationProperty Name="DATADICTIONARYDETAIL1" Relationship="MBRModel.FK_Reference_59" FromRole="DATADICTIONARYDETAIL" ToRole="DATADICTIONARYDETAIL1" />
+          <NavigationProperty Name="DATADICTIONARYDETAIL2" Relationship="MBRModel.FK_Reference_59" FromRole="DATADICTIONARYDETAIL1" ToRole="DATADICTIONARYDETAIL" />
+        </EntityType>
+        <EntityType Name="ForecastAccumulativeChlorine">
+          <Key>
+            <PropertyRef Name="ForecastAccumulativeChlorineID" />
+          </Key>
+          <Property Type="Int32" Name="ForecastAccumulativeChlorineID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="MBRID" />
+          <Property Type="String" Name="Formula" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="UpdateDate" />
+          <NavigationProperty Name="MBRMembrane" Relationship="MBRModel.FK_Reference_12" FromRole="ForecastAccumulativeChlorine" ToRole="MBRMembrane" />
+        </EntityType>
+        <EntityType Name="ForecastPermeableRate">
+          <Key>
+            <PropertyRef Name="ForecastPermeableRateID" />
+          </Key>
+          <Property Type="Int32" Name="ForecastPermeableRateID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="MBRID" />
+          <Property Type="String" Name="FormulaBefore" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FormulaAfter" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="UpdateDate" />
+          <NavigationProperty Name="MBRMembrane" Relationship="MBRModel.FK_Reference_11" FromRole="ForecastPermeableRate" ToRole="MBRMembrane" />
+        </EntityType>
+        <EntityType Name="Line">
+          <Key>
+            <PropertyRef Name="LineID" />
+          </Key>
+          <Property Type="Int32" Name="LineID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="LineName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Note" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OrderBy" />
+          <NavigationProperty Name="MBRMembrane" Relationship="MBRModel.FK_Reference_8" FromRole="Line" ToRole="MBRMembrane" />
+          <NavigationProperty Name="RunRecord" Relationship="MBRModel.FK_Reference_9" FromRole="Line" ToRole="RunRecord" />
+        </EntityType>
+        <EntityType Name="MBRMembrane">
+          <Key>
+            <PropertyRef Name="MBRID" />
+          </Key>
+          <Property Type="Int32" Name="MBRID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="LineID" />
+          <Property Type="String" Name="Manufacturer" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SpecificationModel" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Title" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ChangeDate" />
+          <Property Type="DateTime" Name="StartDate" />
+          <Property Type="DateTime" Name="EndDate" />
+          <Property Type="String" Name="Remark" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreateBy" />
+          <Property Type="DateTime" Name="CreateDate" />
+          <Property Type="Int32" Name="UpdateBy" />
+          <Property Type="DateTime" Name="UpdateDate" />
+          <NavigationProperty Name="ForecastAccumulativeChlorine" Relationship="MBRModel.FK_Reference_12" FromRole="MBRMembrane" ToRole="ForecastAccumulativeChlorine" />
+          <NavigationProperty Name="ForecastPermeableRate" Relationship="MBRModel.FK_Reference_11" FromRole="MBRMembrane" ToRole="ForecastPermeableRate" />
+          <NavigationProperty Name="Line" Relationship="MBRModel.FK_Reference_8" FromRole="MBRMembrane" ToRole="Line" />
+        </EntityType>
+        <EntityType Name="MembraneAlert">
+          <Key>
+            <PropertyRef Name="MembraneAlertID" />
+          </Key>
+          <Property Type="Int32" Name="MembraneAlertID" Nullable="false" />
+          <Property Type="Double" Name="PermeableRateMin" />
+          <Property Type="Double" Name="DurationMax" />
+          <Property Type="Double" Name="AccumulativeChlorine" />
+        </EntityType>
         <EntityType Name="Module">
           <Key>
             <PropertyRef Name="ModuleID" />
@@ -214,9 +610,9 @@
           <Property Type="String" Name="Remark" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="Level" />
           <Property Type="Boolean" Name="Isexpand" />
-          <NavigationProperty Name="Module1" Relationship="MBRModel.module_ibfk_1" FromRole="Module" ToRole="Module1" />
-          <NavigationProperty Name="Module2" Relationship="MBRModel.module_ibfk_1" FromRole="Module1" ToRole="Module" />
-          <NavigationProperty Name="ModulePermission" Relationship="MBRModel.modulepermission_ibfk_1" FromRole="Module" ToRole="ModulePermission" />
+          <NavigationProperty Name="ModulePermission" Relationship="MBRModel.FK_Reference_55" FromRole="Module" ToRole="ModulePermission" />
+          <NavigationProperty Name="Module1" Relationship="MBRModel.FK_Reference_60" FromRole="Module" ToRole="Module1" />
+          <NavigationProperty Name="Module2" Relationship="MBRModel.FK_Reference_60" FromRole="Module1" ToRole="Module" />
         </EntityType>
         <EntityType Name="ModulePermission">
           <Key>
@@ -226,14 +622,43 @@
           <Property Type="Int32" Name="Category" />
           <Property Type="Int32" Name="ObjectID" />
           <Property Type="Int32" Name="ModuleID" />
-          <NavigationProperty Name="Module" Relationship="MBRModel.modulepermission_ibfk_1" FromRole="ModulePermission" ToRole="Module" />
+          <NavigationProperty Name="Module" Relationship="MBRModel.FK_Reference_55" FromRole="ModulePermission" ToRole="Module" />
+        </EntityType>
+        <EntityType Name="Param">
+          <Key>
+            <PropertyRef Name="ParamID" />
+          </Key>
+          <Property Type="String" Name="ParamID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Unit" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Format" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OrderBy" />
+          <Property Type="Boolean" Name="IsCurve" />
+          <Property Type="String" Name="RreshInterval" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Double" Name="ScaleYMax" />
+          <Property Type="Double" Name="ScaleYMin" />
+          <Property Type="Double" Name="ParamMax" />
+          <Property Type="Double" Name="ParamMin" />
+          <Property Type="String" Name="Remark" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PermeableRrateAlert">
+          <Key>
+            <PropertyRef Name="PermeableRrateAlertID" />
+          </Key>
+          <Property Type="Int32" Name="PermeableRrateAlertID" Nullable="false" />
+          <Property Type="Double" Name="OnlineMin" />
+          <Property Type="Double" Name="OnlineMax" />
+          <Property Type="Double" Name="OfflineMin" />
+          <Property Type="Double" Name="OfflineMax" />
+          <Property Type="Double" Name="ChangeMin" />
+          <Property Type="Double" Name="ChangeMax" />
+          <Property Type="Double" Name="DurationMax" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="RoleID" />
           </Key>
           <Property Type="Int32" Name="RoleID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="CompanyID" />
           <Property Type="Int32" Name="Category" />
           <Property Type="String" Name="Code" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="FullName" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -241,6 +666,32 @@
           <Property Type="String" Name="Note" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="OrderBy" />
           <NavigationProperty Name="User" Relationship="MBRModel.RoleUser" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="RunRecord">
+          <Key>
+            <PropertyRef Name="RunRecordID" />
+          </Key>
+          <Property Type="Int32" Name="RunRecordID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="LineID" />
+          <Property Type="DateTime" Name="RunDate" />
+          <Property Type="Double" Name="Column_4" />
+          <Property Type="Double" Name="Column_5" />
+          <Property Type="Double" Name="Column_6" />
+          <Property Type="Double" Name="Column_7" />
+          <Property Type="Double" Name="Column_8" />
+          <Property Type="Double" Name="Column_9" />
+          <Property Type="Double" Name="Column_10" />
+          <Property Type="Double" Name="Column_11" />
+          <Property Type="Double" Name="Column_12" />
+          <Property Type="Double" Name="Column_13" />
+          <Property Type="Double" Name="Column_14" />
+          <Property Type="Double" Name="Column_15" />
+          <Property Type="Double" Name="Column_16" />
+          <Property Type="Double" Name="Column_17" />
+          <Property Type="Double" Name="Column_18" />
+          <Property Type="Double" Name="Column_19" />
+          <Property Type="Double" Name="Column_20" />
+          <NavigationProperty Name="Line" Relationship="MBRModel.FK_Reference_9" FromRole="RunRecord" ToRole="Line" />
         </EntityType>
         <EntityType Name="SysException">
           <Key>
@@ -267,12 +718,20 @@
           <Property Type="String" Name="Module" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="CreateTime" />
         </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Age" />
+          <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
           <Property Type="Int32" Name="UserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="CompanyID" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="RealName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -281,19 +740,91 @@
           <Property Type="String" Name="Remark" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Role" Relationship="MBRModel.RoleUser" FromRole="User" ToRole="Role" />
         </EntityType>
-        <Association Name="module_ibfk_1">
-          <End Type="MBRModel.Module" Role="Module" Multiplicity="0..1" />
-          <End Type="MBRModel.Module" Role="Module1" Multiplicity="*" />
+        <Association Name="FK_Reference_57">
+          <End Type="MBRModel.DATADICTIONARY" Role="DATADICTIONARY" Multiplicity="0..1" />
+          <End Type="MBRModel.DATADICTIONARY" Role="DATADICTIONARY1" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Module">
-              <PropertyRef Name="ModuleID" />
+            <Principal Role="DATADICTIONARY">
+              <PropertyRef Name="DATADICTIONARYID" />
             </Principal>
-            <Dependent Role="Module1">
-              <PropertyRef Name="ParentId" />
+            <Dependent Role="DATADICTIONARY1">
+              <PropertyRef Name="PARENTID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="modulepermission_ibfk_1">
+        <Association Name="FK_Reference_58">
+          <End Type="MBRModel.DATADICTIONARY" Role="DATADICTIONARY" Multiplicity="0..1" />
+          <End Type="MBRModel.DATADICTIONARYDETAIL" Role="DATADICTIONARYDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATADICTIONARY">
+              <PropertyRef Name="DATADICTIONARYID" />
+            </Principal>
+            <Dependent Role="DATADICTIONARYDETAIL">
+              <PropertyRef Name="DATADICTIONARYID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reference_59">
+          <End Type="MBRModel.DATADICTIONARYDETAIL" Role="DATADICTIONARYDETAIL" Multiplicity="0..1" />
+          <End Type="MBRModel.DATADICTIONARYDETAIL" Role="DATADICTIONARYDETAIL1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATADICTIONARYDETAIL">
+              <PropertyRef Name="DATADICTIONARYDETAILID" />
+            </Principal>
+            <Dependent Role="DATADICTIONARYDETAIL1">
+              <PropertyRef Name="PARENTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reference_12">
+          <End Type="MBRModel.MBRMembrane" Role="MBRMembrane" Multiplicity="0..1" />
+          <End Type="MBRModel.ForecastAccumulativeChlorine" Role="ForecastAccumulativeChlorine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MBRMembrane">
+              <PropertyRef Name="MBRID" />
+            </Principal>
+            <Dependent Role="ForecastAccumulativeChlorine">
+              <PropertyRef Name="MBRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reference_11">
+          <End Type="MBRModel.MBRMembrane" Role="MBRMembrane" Multiplicity="0..1" />
+          <End Type="MBRModel.ForecastPermeableRate" Role="ForecastPermeableRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MBRMembrane">
+              <PropertyRef Name="MBRID" />
+            </Principal>
+            <Dependent Role="ForecastPermeableRate">
+              <PropertyRef Name="MBRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reference_8">
+          <End Type="MBRModel.Line" Role="Line" Multiplicity="0..1" />
+          <End Type="MBRModel.MBRMembrane" Role="MBRMembrane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Line">
+              <PropertyRef Name="LineID" />
+            </Principal>
+            <Dependent Role="MBRMembrane">
+              <PropertyRef Name="LineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reference_9">
+          <End Type="MBRModel.Line" Role="Line" Multiplicity="0..1" />
+          <End Type="MBRModel.RunRecord" Role="RunRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Line">
+              <PropertyRef Name="LineID" />
+            </Principal>
+            <Dependent Role="RunRecord">
+              <PropertyRef Name="LineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reference_55">
           <End Type="MBRModel.Module" Role="Module" Multiplicity="0..1" />
           <End Type="MBRModel.ModulePermission" Role="ModulePermission" Multiplicity="*" />
           <ReferentialConstraint>
@@ -305,25 +836,120 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Reference_60">
+          <End Type="MBRModel.Module" Role="Module" Multiplicity="0..1" />
+          <End Type="MBRModel.Module" Role="Module1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="Module1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="RoleUser">
           <End Type="MBRModel.User" Role="User" Multiplicity="*" />
           <End Type="MBRModel.Role" Role="Role" Multiplicity="*" />
         </Association>
-        <EntityType Name="Test">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Age" Type="Int32" />
-          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MBRModelStoreContainer" CdmEntityContainer="MBREntities">
+          <EntitySetMapping Name="DATADICTIONARY">
+            <EntityTypeMapping TypeName="MBRModel.DATADICTIONARY">
+              <MappingFragment StoreEntitySet="DATADICTIONARY">
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+                <ScalarProperty Name="DELETEMARK" ColumnName="DELETEMARK" />
+                <ScalarProperty Name="SORTCODE" ColumnName="SORTCODE" />
+                <ScalarProperty Name="ENABLED" ColumnName="ENABLED" />
+                <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
+                <ScalarProperty Name="ISTREE" ColumnName="ISTREE" />
+                <ScalarProperty Name="PARENTID" ColumnName="PARENTID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="DATADICTIONARYID" ColumnName="DATADICTIONARYID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DATADICTIONARYDETAIL">
+            <EntityTypeMapping TypeName="MBRModel.DATADICTIONARYDETAIL">
+              <MappingFragment StoreEntitySet="DATADICTIONARYDETAIL">
+                <ScalarProperty Name="DELETEMARK" ColumnName="DELETEMARK" />
+                <ScalarProperty Name="SORTCODE" ColumnName="SORTCODE" />
+                <ScalarProperty Name="ENABLED" ColumnName="ENABLED" />
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+                <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+                <ScalarProperty Name="PARENTID" ColumnName="PARENTID" />
+                <ScalarProperty Name="DATADICTIONARYID" ColumnName="DATADICTIONARYID" />
+                <ScalarProperty Name="DATADICTIONARYDETAILID" ColumnName="DATADICTIONARYDETAILID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ForecastAccumulativeChlorine">
+            <EntityTypeMapping TypeName="MBRModel.ForecastAccumulativeChlorine">
+              <MappingFragment StoreEntitySet="ForecastAccumulativeChlorine">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="Formula" ColumnName="Formula" />
+                <ScalarProperty Name="MBRID" ColumnName="MBRID" />
+                <ScalarProperty Name="ForecastAccumulativeChlorineID" ColumnName="ForecastAccumulativeChlorineID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ForecastPermeableRate">
+            <EntityTypeMapping TypeName="MBRModel.ForecastPermeableRate">
+              <MappingFragment StoreEntitySet="ForecastPermeableRate">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="FormulaAfter" ColumnName="FormulaAfter" />
+                <ScalarProperty Name="FormulaBefore" ColumnName="FormulaBefore" />
+                <ScalarProperty Name="MBRID" ColumnName="MBRID" />
+                <ScalarProperty Name="ForecastPermeableRateID" ColumnName="ForecastPermeableRateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Line">
+            <EntityTypeMapping TypeName="MBRModel.Line">
+              <MappingFragment StoreEntitySet="Line">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="LineName" ColumnName="LineName" />
+                <ScalarProperty Name="LineID" ColumnName="LineID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MBRMembrane">
+            <EntityTypeMapping TypeName="MBRModel.MBRMembrane">
+              <MappingFragment StoreEntitySet="MBRMembrane">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SpecificationModel" ColumnName="SpecificationModel" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="LineID" ColumnName="LineID" />
+                <ScalarProperty Name="MBRID" ColumnName="MBRID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MembraneAlert">
+            <EntityTypeMapping TypeName="MBRModel.MembraneAlert">
+              <MappingFragment StoreEntitySet="MembraneAlert">
+                <ScalarProperty Name="AccumulativeChlorine" ColumnName="AccumulativeChlorine" />
+                <ScalarProperty Name="DurationMax" ColumnName="DurationMax" />
+                <ScalarProperty Name="PermeableRateMin" ColumnName="PermeableRateMin" />
+                <ScalarProperty Name="MembraneAlertID" ColumnName="MembraneAlertID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Module">
             <EntityTypeMapping TypeName="MBRModel.Module">
               <MappingFragment StoreEntitySet="Module">
@@ -352,6 +978,38 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Param">
+            <EntityTypeMapping TypeName="MBRModel.Param">
+              <MappingFragment StoreEntitySet="Param">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ParamMin" ColumnName="ParamMin" />
+                <ScalarProperty Name="ParamMax" ColumnName="ParamMax" />
+                <ScalarProperty Name="ScaleYMin" ColumnName="ScaleYMin" />
+                <ScalarProperty Name="ScaleYMax" ColumnName="ScaleYMax" />
+                <ScalarProperty Name="RreshInterval" ColumnName="RreshInterval" />
+                <ScalarProperty Name="IsCurve" ColumnName="IsCurve" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="Format" ColumnName="Format" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ParamID" ColumnName="ParamID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PermeableRrateAlert">
+            <EntityTypeMapping TypeName="MBRModel.PermeableRrateAlert">
+              <MappingFragment StoreEntitySet="PermeableRrateAlert">
+                <ScalarProperty Name="DurationMax" ColumnName="DurationMax" />
+                <ScalarProperty Name="ChangeMax" ColumnName="ChangeMax" />
+                <ScalarProperty Name="ChangeMin" ColumnName="ChangeMin" />
+                <ScalarProperty Name="OfflineMax" ColumnName="OfflineMax" />
+                <ScalarProperty Name="OfflineMin" ColumnName="OfflineMin" />
+                <ScalarProperty Name="OnlineMax" ColumnName="OnlineMax" />
+                <ScalarProperty Name="OnlineMin" ColumnName="OnlineMin" />
+                <ScalarProperty Name="PermeableRrateAlertID" ColumnName="PermeableRrateAlertID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Role">
             <EntityTypeMapping TypeName="MBRModel.Role">
               <MappingFragment StoreEntitySet="Role">
@@ -361,8 +1019,33 @@
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RunRecord">
+            <EntityTypeMapping TypeName="MBRModel.RunRecord">
+              <MappingFragment StoreEntitySet="RunRecord">
+                <ScalarProperty Name="Column_20" ColumnName="Column_20" />
+                <ScalarProperty Name="Column_19" ColumnName="Column_19" />
+                <ScalarProperty Name="Column_18" ColumnName="Column_18" />
+                <ScalarProperty Name="Column_17" ColumnName="Column_17" />
+                <ScalarProperty Name="Column_16" ColumnName="Column_16" />
+                <ScalarProperty Name="Column_15" ColumnName="Column_15" />
+                <ScalarProperty Name="Column_14" ColumnName="Column_14" />
+                <ScalarProperty Name="Column_13" ColumnName="Column_13" />
+                <ScalarProperty Name="Column_12" ColumnName="Column_12" />
+                <ScalarProperty Name="Column_11" ColumnName="Column_11" />
+                <ScalarProperty Name="Column_10" ColumnName="Column_10" />
+                <ScalarProperty Name="Column_9" ColumnName="Column_9" />
+                <ScalarProperty Name="Column_8" ColumnName="Column_8" />
+                <ScalarProperty Name="Column_7" ColumnName="Column_7" />
+                <ScalarProperty Name="Column_6" ColumnName="Column_6" />
+                <ScalarProperty Name="Column_5" ColumnName="Column_5" />
+                <ScalarProperty Name="Column_4" ColumnName="Column_4" />
+                <ScalarProperty Name="RunDate" ColumnName="RunDate" />
+                <ScalarProperty Name="LineID" ColumnName="LineID" />
+                <ScalarProperty Name="RunRecordID" ColumnName="RunRecordID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -393,6 +1076,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Test">
+            <EntityTypeMapping TypeName="MBRModel.Test">
+              <MappingFragment StoreEntitySet="Test">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="MBRModel.User">
               <MappingFragment StoreEntitySet="User">
@@ -402,7 +1095,6 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="RealName" ColumnName="RealName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -415,16 +1107,6 @@
               <ScalarProperty Name="UserID" ColumnName="UserID" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Test">
-            <EntityTypeMapping TypeName="MBRModel.Test">
-              <MappingFragment StoreEntitySet="Test">
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -448,27 +1130,70 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="MBR" ZoomLevel="97">
-        <EntityTypeShape EntityType="MBRModel.Module" Width="1.5" PointX="0.75" PointY="1" Height="3.8802294921874991" />
-        <EntityTypeShape EntityType="MBRModel.ModulePermission" Width="1.5" PointX="3" PointY="2" Height="1.9700325520833335" />
-        <EntityTypeShape EntityType="MBRModel.Role" Width="1.5" PointX="5" PointY="5" Height="2.7341113281249996" />
-        <EntityTypeShape EntityType="MBRModel.SysException" Width="1.5" PointX="5.75" PointY="0.75" Height="2.5430916341145817" />
-        <EntityTypeShape EntityType="MBRModel.SysLog" Width="1.5" PointX="7.75" PointY="0.75" Height="2.3520719401041674" />
-        <EntityTypeShape EntityType="MBRModel.User" Width="1.5" PointX="2.75" PointY="5" Height="2.7341113281249996" />
-        <AssociationConnector Association="MBRModel.module_ibfk_1" >
-          <ConnectorPoint PointX="1.2819230769230767" PointY="4.8802294921875" />
-          <ConnectorPoint PointX="1.2819230769230767" PointY="5.1302294921875" />
-          <ConnectorPoint PointX="1.7284615384615383" PointY="5.1302294921875" />
-          <ConnectorPoint PointX="1.7284615384615383" PointY="4.8802294921875" />
+        <EntityTypeShape EntityType="MBRModel.DATADICTIONARY" Width="1.5" PointX="9.75" PointY="1" Height="3.6892097981770817" />
+        <EntityTypeShape EntityType="MBRModel.DATADICTIONARYDETAIL" Width="1.5" PointX="12" PointY="1.25" Height="3.3071704101562496" />
+        <EntityTypeShape EntityType="MBRModel.ForecastAccumulativeChlorine" Width="1.5" PointX="7.25" PointY="5.375" Height="1.9700325520833317" />
+        <EntityTypeShape EntityType="MBRModel.ForecastPermeableRate" Width="1.5" PointX="7.25" PointY="8.125" Height="2.1610522460937531" />
+        <EntityTypeShape EntityType="MBRModel.Line" Width="1.5" PointX="2.75" PointY="9.625" Height="2.1610522460937531" />
+        <EntityTypeShape EntityType="MBRModel.MBRMembrane" Width="1.5" PointX="5" PointY="5.75" Height="4.0712491861979174" />
+        <EntityTypeShape EntityType="MBRModel.MembraneAlert" Width="1.5" PointX="5.75" PointY="0.75" Height="1.7790128580729174" />
+        <EntityTypeShape EntityType="MBRModel.Module" Width="1.5" PointX="0.75" PointY="1" Height="3.8802294921875027" />
+        <EntityTypeShape EntityType="MBRModel.ModulePermission" Width="1.5" PointX="3" PointY="2" Height="1.9700325520833388" />
+        <EntityTypeShape EntityType="MBRModel.Param" Width="1.5" PointX="9.75" PointY="9.75" Height="3.3071704101562531" />
+        <EntityTypeShape EntityType="MBRModel.PermeableRrateAlert" Width="1.5" PointX="0.75" PointY="5.75" Height="2.5430916341145888" />
+        <EntityTypeShape EntityType="MBRModel.Role" Width="1.5" PointX="12" PointY="6" Height="2.5430916341145888" />
+        <EntityTypeShape EntityType="MBRModel.RunRecord" Width="1.5" PointX="5" PointY="11" Height="5.026347656249996" />
+        <EntityTypeShape EntityType="MBRModel.SysException" Width="1.5" PointX="11.75" PointY="9.75" Height="2.5430916341145817" />
+        <EntityTypeShape EntityType="MBRModel.SysLog" Width="1.5" PointX="0.75" PointY="12.75" Height="2.3520719401041674" />
+        <EntityTypeShape EntityType="MBRModel.Test" Width="1.5" PointX="13.75" PointY="9.75" Height="1.7790128580729174" />
+        <EntityTypeShape EntityType="MBRModel.User" Width="1.5" PointX="9.75" PointY="6" Height="2.5430916341145746" />
+        <AssociationConnector Association="MBRModel.FK_Reference_57" >
+          <ConnectorPoint PointX="10.281923076923077" PointY="4.6892097981770817" />
+          <ConnectorPoint PointX="10.281923076923077" PointY="4.9392097981770817" />
+          <ConnectorPoint PointX="10.728461538461538" PointY="4.9392097981770817" />
+          <ConnectorPoint PointX="10.728461538461538" PointY="4.6892097981770817" />
         </AssociationConnector>
-        <AssociationConnector Association="MBRModel.modulepermission_ibfk_1" >
-          <ConnectorPoint PointX="2.25" PointY="2.9850162760416667" />
-          <ConnectorPoint PointX="3" PointY="2.9850162760416667" />
+        <AssociationConnector Association="MBRModel.FK_Reference_58" >
+          <ConnectorPoint PointX="11.25" PointY="2.9035852050781248" />
+          <ConnectorPoint PointX="12" PointY="2.9035852050781248" />
+        </AssociationConnector>
+        <AssociationConnector Association="MBRModel.FK_Reference_59" >
+          <ConnectorPoint PointX="12.531923076923077" PointY="4.55717041015625" />
+          <ConnectorPoint PointX="12.531923076923077" PointY="4.80717041015625" />
+          <ConnectorPoint PointX="12.978461538461538" PointY="4.80717041015625" />
+          <ConnectorPoint PointX="12.978461538461538" PointY="4.55717041015625" />
+        </AssociationConnector>
+        <AssociationConnector Association="MBRModel.FK_Reference_12" >
+          <ConnectorPoint PointX="6.5" PointY="6.5475162760416659" />
+          <ConnectorPoint PointX="7.25" PointY="6.5475162760416659" />
+        </AssociationConnector>
+        <AssociationConnector Association="MBRModel.FK_Reference_11" >
+          <ConnectorPoint PointX="6.5" PointY="8.9731245930989587" />
+          <ConnectorPoint PointX="7.25" PointY="8.9731245930989587" />
+        </AssociationConnector>
+        <AssociationConnector Association="MBRModel.FK_Reference_8" >
+          <ConnectorPoint PointX="3.5" PointY="9.625" />
+          <ConnectorPoint PointX="3.5" PointY="7.6874995" />
+          <ConnectorPoint PointX="5" PointY="7.6874995" />
+        </AssociationConnector>
+        <AssociationConnector Association="MBRModel.FK_Reference_9" >
+          <ConnectorPoint PointX="4.25" PointY="11.393026123046877" />
+          <ConnectorPoint PointX="5" PointY="11.393026123046877" />
+        </AssociationConnector>
+        <AssociationConnector Association="MBRModel.FK_Reference_55" >
+          <ConnectorPoint PointX="2.25" PointY="2.9850162760416694" />
+          <ConnectorPoint PointX="3" PointY="2.9850162760416694" />
+        </AssociationConnector>
+        <AssociationConnector Association="MBRModel.FK_Reference_60" >
+          <ConnectorPoint PointX="1.2819230769230767" PointY="4.8802294921875031" />
+          <ConnectorPoint PointX="1.2819230769230767" PointY="5.1302294921875031" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="5.1302294921875031" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="4.8802294921875031" />
         </AssociationConnector>
         <AssociationConnector Association="MBRModel.RoleUser" >
-          <ConnectorPoint PointX="4.25" PointY="6.3670556640625" />
-          <ConnectorPoint PointX="5" PointY="6.3670556640625" />
+          <ConnectorPoint PointX="11.25" PointY="7.2715458170572873" />
+          <ConnectorPoint PointX="12" PointY="7.2715458170572873" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="MBRModel.Test" Width="1.5" PointX="7.875" PointY="4.5" />
       </Diagram>
     </Diagrams>
   </Designer>

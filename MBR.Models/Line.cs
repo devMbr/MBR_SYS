@@ -12,22 +12,21 @@ using System.Collections.Generic;
 
 namespace MBR.Models
 {
-    public partial class User
+    public partial class Line
     {
-        public User()
+        public Line()
         {
-            this.Role = new HashSet<Role>();
+            this.MBRMembrane = new HashSet<MBRMembrane>();
+            this.RunRecord = new HashSet<RunRecord>();
         }
     
-        public int UserID { get; set; }
-        public string UserName { get; set; }
-        public string RealName { get; set; }
-        public string Password { get; set; }
-        public Nullable<bool> Enabled { get; set; }
+        public int LineID { get; set; }
+        public string LineName { get; set; }
+        public string Note { get; set; }
         public Nullable<int> OrderBy { get; set; }
-        public string Remark { get; set; }
     
-        public virtual ICollection<Role> Role { get; set; }
+        public virtual ICollection<MBRMembrane> MBRMembrane { get; set; }
+        public virtual ICollection<RunRecord> RunRecord { get; set; }
     }
     
 }

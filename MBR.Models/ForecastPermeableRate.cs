@@ -12,22 +12,15 @@ using System.Collections.Generic;
 
 namespace MBR.Models
 {
-    public partial class User
+    public partial class ForecastPermeableRate
     {
-        public User()
-        {
-            this.Role = new HashSet<Role>();
-        }
+        public int ForecastPermeableRateID { get; set; }
+        public Nullable<int> MBRID { get; set; }
+        public string FormulaBefore { get; set; }
+        public string FormulaAfter { get; set; }
+        public Nullable<System.DateTime> UpdateDate { get; set; }
     
-        public int UserID { get; set; }
-        public string UserName { get; set; }
-        public string RealName { get; set; }
-        public string Password { get; set; }
-        public Nullable<bool> Enabled { get; set; }
-        public Nullable<int> OrderBy { get; set; }
-        public string Remark { get; set; }
-    
-        public virtual ICollection<Role> Role { get; set; }
+        public virtual MBRMembrane MBRMembrane { get; set; }
     }
     
 }
