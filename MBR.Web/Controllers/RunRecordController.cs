@@ -21,14 +21,15 @@ namespace MBR.Web.Controllers
             return View();
         }
 
-        public JsonResult GetList(GridPager pager, string queryStr)
+        public JsonResult GetList(GridPager pager, string beginDate = null, string endDate = null)
         {
-            queryStr = Request["search[value]"];
-
             Expression<Func<RunRecord, bool>> predicate = null;
-            if (!string.IsNullOrEmpty(queryStr))
+            if (!string.IsNullOrEmpty(beginDate) && !string.IsNullOrEmpty(endDate))
             {
-                predicate = m => m.RunDate >= DateTime.Now;
+                DateTime dBeginDate = Convert.ToDateTime(beginDate);
+                DateTime dEndDate = Convert.ToDateTime(endDate);
+
+                predicate = m => m.RunDate >= dBeginDate && m.RunDate <= dEndDate;
             }
             using (MBREntities db = new MBREntities())
             {
