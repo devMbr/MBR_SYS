@@ -54,6 +54,7 @@
     <Compile Include="DATADICTIONARYDETAIL.cs">
       <DependentUpon>MBR.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extend\Membrane.cs" />
     <Compile Include="Extend\User.cs" />
     <Compile Include="ForecastAccumulativeChlorine.cs">
       <DependentUpon>MBR.tt</DependentUpon>

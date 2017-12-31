@@ -12,7 +12,7 @@ using MBR.Models;
 
 namespace MBR.Web
 {
-    [LogonActionAttributeFilter]
+    //[LogonActionAttributeFilter]
     public class BaseController : Controller
     {
 
@@ -28,13 +28,12 @@ namespace MBR.Web
         {
             get
             {
-                //return new User
-                //{
-                //    UserID = 1,
-                //    USERNAME = "admin",
-                //    REALNAME = "管理员",
-                //    CompanyID = 1,
-                //};
+                return new User
+                {
+                    UserID = 1,
+                    UserName = "admin",
+                    RealName = "管理员",
+                };
                 return System.Web.HttpContext.Current.Session[Constants.SESSION_USERID] as User;
             }
             set

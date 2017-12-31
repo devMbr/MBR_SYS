@@ -27,6 +27,11 @@ namespace MBR.Web
             };
             return json;
         }
+
+        internal static object CreateMessage(int v, object insertSucceed)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class JsonMessage
