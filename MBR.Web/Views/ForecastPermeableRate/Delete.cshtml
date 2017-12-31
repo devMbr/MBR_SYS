@@ -1,0 +1,46 @@
+﻿@model MBR.Models.ForecastPermeableRate
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>ForecastPermeableRate</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MBRMembrane.Manufacturer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MBRMembrane.Manufacturer)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FormulaBefore)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FormulaBefore)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FormulaAfter)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FormulaAfter)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateDate)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

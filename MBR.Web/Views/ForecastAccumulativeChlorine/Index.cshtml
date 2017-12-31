@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MBR.Models.ForecastAccumulativeChlorine>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MBRMembrane.Manufacturer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Formula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MBRMembrane.Manufacturer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Formula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ForecastAccumulativeChlorineID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ForecastAccumulativeChlorineID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ForecastAccumulativeChlorineID })
+        </td>
+    </tr>
+}
+
+</table>
