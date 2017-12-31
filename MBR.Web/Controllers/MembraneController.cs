@@ -103,6 +103,11 @@ namespace MBR.Web.Controllers
             {
                 MembraneService me = new MembraneService(db);
 
+                model.CreateBy = LogonUser.UserID;
+                model.CreateDate = DateTime.Now;
+                model.UpdateBy = LogonUser.UserID;
+                model.UpdateDate = DateTime.Now;
+
                 if (me.Create(ref errors, model))
                 {
                     return Json(JsonHandler.CreateMessage(1, Resource.InsertSucceed), JsonRequestBehavior.AllowGet);
