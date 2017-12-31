@@ -13,10 +13,10 @@
                 <div class="row">
                     <div class="col-sm-1"></div>
                     <div class="col-sm-11">
-                        <div id="tbUser_filter" class="dataTables_filter">
+                        <div class="dataTables_filter">
                             <label>选择膜池:</label>
                             <label>
-                                <select id="mbrId" name="mbrId"></select>
+                                <select id="mbrId" name="mbrId" class="form-control"></select>
                             </label>
                         </div>
 
@@ -77,9 +77,6 @@
             e.preventDefault();
             $(this).tab('show');
         });
-
-                        
-                       
         permeable_chart = Highcharts.chart('permeable_rate', permeable_Options);
         chlorin_chart = Highcharts.chart('add_up_chlorin', chlorin_Options);
         ajaxData();
@@ -141,7 +138,6 @@
         title: {
             text: '累积氯预测'
         },
-
         xAxis: {
             type: 'datetime',
             title: {
@@ -229,7 +225,6 @@
         data: { mbrId: mbrId },
         success: function (data) {
             //chlorin_chart
-            console.log(data);
             var arr = new Array();
             for (var i = 0; i < data.length; i++) {
                 var entity = data[i];
