@@ -129,6 +129,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ForecastAccumulativeChlorineController.cs" />
+    <Compile Include="Controllers\ForecastPermeableRateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -1397,6 +1399,17 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\ModifyPass.cshtml" />
+    <Content Include="Views\ForecastPermeableRate\Index.cshtml" />
+    <Content Include="Views\ForecastPermeableRate\Details.cshtml" />
+    <Content Include="Views\ForecastPermeableRate\Create.cshtml" />
+    <Content Include="Views\ForecastPermeableRate\Edit.cshtml" />
+    <Content Include="Views\ForecastPermeableRate\Delete.cshtml" />
+    <Content Include="Views\ForecastAccumulativeChlorine\Index.cshtml" />
+    <Content Include="Views\ForecastAccumulativeChlorine\Details.cshtml" />
+    <Content Include="Views\ForecastAccumulativeChlorine\Create.cshtml" />
+    <Content Include="Views\ForecastAccumulativeChlorine\Edit.cshtml" />
+    <Content Include="Views\ForecastAccumulativeChlorine\Delete.cshtml" />
+    <Content Include="Views\ForecastPermeableRate\AutoForecast.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

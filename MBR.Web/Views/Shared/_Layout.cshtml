@@ -15,6 +15,13 @@
     <script src="~/Scripts/html5shiv.min.js"></script>
     <script src="~/Scripts/respond.min.js"></script>
     <![endif]-->
+    <script src="~/plugins/jQuery/jquery-1.12.4.min.js"></script>
+    <script src="~/plugins/jQuery/jquery-migrate.min.js"></script>
+    <script src="~/Scripts/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="~/plugins/fastclick/fastclick.js"></script>
+    <script src="~/Scripts/app.min.js"></script>
+    <script src="~/Scripts/highcharts.js"></script>
 </head>
 <body class="skin-blue sidebar-mini sidebar-collapse">
     <div class="wrapper">
@@ -41,13 +48,7 @@
         </div>
         @Html.Partial("_Footer")
     </div>
-    <script src="~/plugins/jQuery/jquery-1.12.4.min.js"></script>
-    <script src="~/plugins/jQuery/jquery-migrate.min.js"></script>
-    <script src="~/Scripts/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-    <script src="~/plugins/fastclick/fastclick.js"></script>
-    <script src="~/Scripts/app.min.js"></script>
-    <script src="~/Scripts/highcharts.js"></script>
+    
     @RenderSection("scripts", required: false)
 </body>
 </html>

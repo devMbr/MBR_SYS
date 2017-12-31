@@ -1,0 +1,43 @@
+﻿@model MBR.Models.ForecastPermeableRate
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ForecastPermeableRate</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MBRMembrane.Manufacturer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MBRMembrane.Manufacturer)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FormulaBefore)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FormulaBefore)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FormulaAfter)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FormulaAfter)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ForecastPermeableRateID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

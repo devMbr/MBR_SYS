@@ -1,0 +1,36 @@
+﻿@model MBR.Models.ForecastAccumulativeChlorine
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ForecastAccumulativeChlorine</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MBRMembrane.Manufacturer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MBRMembrane.Manufacturer)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Formula)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Formula)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ForecastAccumulativeChlorineID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
