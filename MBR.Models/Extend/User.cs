@@ -19,6 +19,14 @@ namespace MBR.Models
             }
         }
 
+        public String RoleIds
+        {
+            get
+            {
+                return "";
+            }
+        }
+        
     }
 
     public class UserMetadata
