@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MBR.Models;
+using System.Linq.Expressions;
+using System.Data;
 
 namespace MBR.Web.Services
 {
@@ -94,6 +96,52 @@ namespace MBR.Web.Services
             }
         }
 
+
+        public override bool Edit(ref ValidationErrors errors, User model)
+        {
+            try
+            {
+                using (MBREntities db = new MBREntities())
+                {
+                    User entity = db.User.Where(m => m.UserID == model.UserID).FirstOrDefault();
+                    if (entity == null)
+                    {
+                        errors.Add("实体不存在");
+                        return false;
+                    }
+                    //全部删除
+                    if (entity.Role != null && entity.Role.Count() > 0)
+                    {
+                        entity.Role.Clear();
+                    }
+                    entity.Role = new List<Role>();
+
+                    entity.RealName = model.RealName;
+                    entity.Remark = model.Remark;
+
+                    foreach (var item in model.Role)
+                    {
+                        var Role = db.Role.Find(item.RoleID);
+                        if (Role != null) entity.Role.Add(Role);
+                    }
+                    if (Edit(entity))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        errors.Add("编辑失败");
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                errors.Add(ex.Message);
+                ExceptionHander.WriteException(ex);
+                return false;
+            }
+        }
 
         internal bool ModifyPass(ref ValidationErrors errors, int UserID, string OldPassword, string NewPassword)
         {
