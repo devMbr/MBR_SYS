@@ -31,5 +31,6 @@ namespace MBR.Models
         public DbSet<SysException> SysException { get; set; }
         public DbSet<SysLog> SysLog { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<Test> Test { get; set; }
     }
 }

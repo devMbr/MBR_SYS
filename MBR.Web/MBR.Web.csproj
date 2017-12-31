@@ -16,6 +16,11 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -126,6 +131,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Core\BaseController.cs" />
     <Compile Include="Core\Constants.cs" />
@@ -1261,6 +1267,7 @@
     <Content Include="Scripts\excanvas.min.js" />
     <Content Include="Scripts\font-awesome\css\font-awesome.css" />
     <Content Include="Scripts\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Scripts\highcharts.js" />
     <Content Include="Scripts\html5shiv.min.js" />
     <Content Include="Scripts\iColorPicker.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
@@ -1377,6 +1384,11 @@
     <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\Role\Delete.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Test\Details.cshtml" />
+    <Content Include="Views\Test\Create.cshtml" />
+    <Content Include="Views\Test\Edit.cshtml" />
+    <Content Include="Views\Test\Delete.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
