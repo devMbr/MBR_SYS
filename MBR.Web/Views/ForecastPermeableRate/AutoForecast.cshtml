@@ -1,0 +1,246 @@
+﻿@model IEnumerable<MBR.Models.ForecastPermeableRate>
+
+@{
+    ViewBag.Title = "智能预测";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-body">
+
+
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-11">
+                        <div id="tbUser_filter" class="dataTables_filter">
+                            <label>选择膜池:</label>
+                            <label>
+                                <select id="mbrId" name="mbrId"></select>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+                <ul id="myTab" class="nav nav-tabs">
+                    <li><a href="#permeable_rate_div">透水率衰减预测</a></li>
+                    <li><a href="#add_up_chlorin_div">累积氯预测</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane" id="permeable_rate_div">
+                        <div id="permeable_rate" style="min-width:400px;height:400px"></div>
+                    </div>
+                    <div class="tab-pane" id="add_up_chlorin_div">
+                        <div id="add_up_chlorin" style="min-width:400px;height:400px"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var permeable_chart = null;
+    //累积氯预测
+    var chlorin_chart = null;
+
+    $(function () {
+        $("#mbrId").change(function(){
+            ajaxData();
+        });
+        var GetMBRInfo = '@Url.Action("GetMBRInfo")';
+        $.ajax({
+            url: GetMBRInfo,
+            type: "POST",
+            dataType: "json",
+            async: false,//
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var option = "<option value=\"" + data[i].MBRID + "\"";
+                    if (i==0) {
+                        option += " selected=\"selected\" "; //默认选中
+                    }
+                    option += ">" + data[i].Title + "</option>"; //动态添加数据
+                    $("#mbrId").append(option);
+                }
+
+
+                                
+            }
+        });
+
+
+
+        $('#myTab a:first').tab('show');
+        $('#myTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+                        
+                       
+        permeable_chart = Highcharts.chart('permeable_rate', permeable_Options);
+        chlorin_chart = Highcharts.chart('add_up_chlorin', chlorin_Options);
+        ajaxData();
+    });
+
+    var permeable_Options = {
+        chart: {
+            type: 'spline'
+        },
+
+        title: {
+            text: '透水率衰减预测'
+        },
+
+        xAxis: {
+            type: 'datetime',
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: '透水率(%)',
+                style: {
+                    'fontSize': '20px'
+                }
+            },
+            min: 0,
+            max: 100
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: '{point.x:%e. %b}: {point.y:.2f}'
+        },
+        plotOptions: {
+            spline: {
+                //数据点标记
+                marker: {
+                    enabled: true
+                }
+            }
+        },
+        series: [{
+            name: '离线清洗后',
+
+            color: '#f7a35c'
+        }, {
+            name: '离线清洗前',
+
+            color: '#7cb5ec'
+        }]
+    };
+
+    var chlorin_Options = {
+        chart: {
+            type: 'spline'
+        },
+
+        title: {
+            text: '累积氯预测'
+        },
+
+        xAxis: {
+            type: 'datetime',
+            title: {
+                text: '时间'
+            }
+        },
+        yAxis: {
+            title: {
+                text: '累积氯接触值',
+                style: {
+                    'fontSize': '20px'
+                }
+            },
+
+            //ceiling: 50,
+            min: 0
+
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: '{point.x:%e. %b}: {point.y:.2f}'
+        },
+        plotOptions: {
+            spline: {
+                //数据点标记
+                marker: {
+                    enabled: true
+                }
+            }
+        },
+        series: [{
+            name: '氯接触值',
+            color: '#f7a35c',
+
+        }]
+    }
+
+    var GetPermeableUrl = '@Url.Action("GetPermeable")';
+    var GetChlorinValue = '@Url.Action("GetChlorinValue")';
+    function ajaxData() {
+        var mbrId = $("#mbrId").val();
+        $.ajax({
+            url: GetPermeableUrl,
+            type: "POST",
+            dataType: "json",
+            async: false,
+            data: { mbrId: mbrId }, 
+            
+            success: function (data) {
+                var bArr = new Array();
+                var dataBefer = data.befer;
+                if (dataBefer == undefined) {
+                    return;
+                }
+                //之后
+                var aArr = new Array();
+                var dataAfter = data.after;
+                if (dataBefer == undefined) {
+                    return;
+                }
+                for (var i = 0; i < dataAfter.length; i++) {
+                    var entity = dataAfter[i];
+                    aArr[i] = { x: entity.XValue, y: entity.YValue };
+
+                }
+                for (var i = 0; i < dataBefer.length; i++) {
+                    var entity = dataBefer[i];
+                    bArr[i] = { x: entity.XValue, y: entity.YValue };
+
+                }
+                //之后的数据为第一个
+                permeable_chart.series[0].setData(aArr);//数据填充到highcharts上面
+                //之前数据为第二个
+                permeable_chart.series[1].setData(bArr);
+            },
+            error: function () {
+                alert("请求出错处理");
+            }
+    });
+    $.ajax({
+        url: GetChlorinValue,
+        type: "POST",
+        dataType: "json",
+        async: true,
+        data: { mbrId: mbrId },
+        success: function (data) {
+            //chlorin_chart
+            console.log(data);
+            var arr = new Array();
+            for (var i = 0; i < data.length; i++) {
+                var entity = data[i];
+                arr[i] = { x: entity.XValue, y: entity.YValue };
+            }
+            chlorin_chart.series[0].setData(arr);
+        },
+        error: function () {
+            alert("请求出错处理");
+        }
+    });
+}
+
+</script>
