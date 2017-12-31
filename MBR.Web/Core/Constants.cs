@@ -22,9 +22,9 @@ namespace MBR.Web
 
         #region 配置相关
 
-        public static string PRODUCT_NAME = "product";
-        public static string PRODUCT_SHORT_NAME = "product";
-        public static string COMPANY_NAME = "company";
+        public static string PRODUCT_NAME = "MBR膜在线专家系统";
+        public static string PRODUCT_SHORT_NAME = "MBR";
+        public static string COMPANY_NAME = "北京工业大学科技研发中心";
 
         #endregion
 

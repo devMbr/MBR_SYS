@@ -1,0 +1,54 @@
+﻿@model MBR.Models.MBRMembrane
+
+@{
+    Layout = "~/Views/Shared/_Edit_Layout.cshtml";
+}
+@using (Ajax.BeginForm("Create", "Membrane", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    OnSuccess = "OnSuccess",
+    OnFailure = "OnFailure",
+}, new { @class = "form-horizontal", id = "frmEdit" }))
+{
+    <div class="form-body">
+        <div class="form-group">
+            @Html.LabelFor(m => m.ChangeDate, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.TextBoxFor(m => m.ChangeDate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ChangeDate)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Manufacturer, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.TextBoxFor(m => m.Manufacturer, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Manufacturer)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.SpecificationModel, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.TextBoxFor(m => m.SpecificationModel, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.SpecificationModel)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Title, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Title)
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <script>
+        function OnSuccess(data) {
+            parent.doSuccess(parent.$('#tbMembrane'), data.message);
+        }
+
+        function OnFailure(data) {
+            parent.doFailure(data.message);
+        }
+    </script>
+}

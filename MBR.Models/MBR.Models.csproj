@@ -56,6 +56,7 @@
     </Compile>
     <Compile Include="Extend\ForecastAccumulativeChlorine.cs" />
     <Compile Include="Extend\ForecastPermeableRate.cs" />
+    <Compile Include="Extend\Membrane.cs" />
     <Compile Include="Extend\User.cs" />
     <Compile Include="ForecastAccumulativeChlorine.cs">
       <DependentUpon>MBR.tt</DependentUpon>

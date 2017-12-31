@@ -132,6 +132,7 @@
     <Compile Include="Controllers\ForecastAccumulativeChlorineController.cs" />
     <Compile Include="Controllers\ForecastPermeableRateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MembraneController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -148,12 +149,14 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resource1.Designer.cs">
+    <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\LineService.cs" />
+    <Compile Include="Services\MembraneService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\ModuleService.cs" />
     <Compile Include="Util\Encrypt.cs" />
@@ -1410,14 +1413,19 @@
     <Content Include="Views\ForecastAccumulativeChlorine\Edit.cshtml" />
     <Content Include="Views\ForecastAccumulativeChlorine\Delete.cshtml" />
     <Content Include="Views\ForecastPermeableRate\AutoForecast.cshtml" />
+    <Content Include="Views\Membrane\Index.cshtml" />
+    <Content Include="Views\Membrane\Details.cshtml" />
+    <Content Include="Views\Membrane\Create.cshtml" />
+    <Content Include="Views\Membrane\Edit.cshtml" />
+    <Content Include="Views\Membrane\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resource.resx">
-      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
