@@ -307,6 +307,21 @@ var MES = function () {
             return MES.createChartOpt(container, options);
         },
 
+        getzf: function (val) {
+            if (parseInt(val) < 10) {
+                val = '0' + val;  
+            }
+            return val;  
+        },
+        formatDateTime: function (val) {
+            if (val) {
+                var re = /-?\d+/;
+                var m = re.exec(val);
+                var d = new Date(parseInt(m[0]));
+                return d.getFullYear() + '-' + MES.getzf(d.getMonth() + 1) + '-' + MES.getzf(d.getDate()) + ' ' + MES.getzf(d.getHours()) + ':' + MES.getzf(d.getMinutes());
+            }
+            return '';
+        },
         formatTime: function (val) {
             if (val) {
                 var re = /-?\d+/;

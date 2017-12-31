@@ -131,6 +131,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\RunRecordController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Core\BaseController.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\ModuleService.cs" />
+    <Compile Include="Services\RunRecordService.cs" />
     <Compile Include="Util\Encrypt.cs" />
     <Compile Include="Util\EnumHelper.cs" />
     <Compile Include="Util\ExceptionHander.cs" />
@@ -1397,6 +1399,7 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\ModifyPass.cshtml" />
+    <Content Include="Views\RunRecord\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
