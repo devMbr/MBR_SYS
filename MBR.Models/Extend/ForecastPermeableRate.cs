@@ -11,7 +11,7 @@ namespace MBR.Models
     {
         public int XValue { get; set; }
 
-        public int YValue { get; set; }
+        public double YValue { get; set; }
     }
 
 }
