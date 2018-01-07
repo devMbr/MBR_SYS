@@ -12,6 +12,13 @@
 {
     <div class="form-body">
         <div class="form-group">
+            生产线
+            <div class="col-xs-9"> 
+                <select id="lines" name="LineID">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
             @Html.LabelFor(m => m.ChangeDate, new { @class = "control-label col-xs-3" })
             <div class="col-xs-9">
                 @Html.TextBoxFor(m => m.ChangeDate, new { @class = "form-control" })
@@ -43,6 +50,21 @@
 }
 @section scripts{
     <script>
+        $(function () {
+            $.ajax({
+                url: "/Membrane/GetLineList",
+                type: "post",
+                success: function (result) {
+                    var option = '';
+                    $.each(result.data, function (i, line) {
+                        option += "<option value=" + line.LineID + ">" + line.LineName + "</option>";
+                    });
+                    jQuery("#lines").html(option);
+                },
+                error: function (text) { }
+            });
+        });
+
         function OnSuccess(data) {
             parent.doSuccess(parent.$('#tbMembrane'), data.message);
         }

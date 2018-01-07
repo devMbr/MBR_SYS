@@ -12,8 +12,8 @@
                 </a>
                 <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                     <div class="row">
-                        <select id="lines" onchange="reGetList()">
-                            <option value="">全部</option>
+                        <select id="lines">
+                            <option value="0">全部</option>
                         </select>
                     </div>
                 </div>
@@ -71,11 +71,38 @@
         var CreateUrl = '@Url.Action("Create")';
         var EditUrl = '@Url.Action("Edit")';
         var DeleteUrl = '@Url.Action("Delete")';
-        var lineId = '';
     </script>
     <script type="text/javascript">
         $(function () {
-            getTableData(lineId);
+            var table = $('#tbMembrane').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": GetListUrl,
+                    "type": "POST",
+                    "data": function (d) {
+                        //添加额外的参数传给服务器
+                        d.LineID = $('#lines option:selected').val(); //开始时间
+                    }
+                },
+                "columns": [
+            { "data": "ChangeDate" },
+            { "data": "Manufacturer" },
+            { "data": "SpecificationModel" },
+            { "data": "Title" },
+            { "data": "MBRID" }
+                ],
+                "columnDefs": [{
+                    "targets": 4,
+                    "data": "opt",
+                    "render": function (data, type, full, meta) {
+                        return '<a href="#EditModal" onclick="OnEdit(' + data + ')" class="btn default btn-xs blue" data-toggle="modal"><i class="fa fa-edit"></i> 编辑 </a>' +
+                                    '<a href="javascript:void(0);" onclick="OnDelete(' + data + ')" class="btn default btn-xs blue"><i class="fa fa-trash-o"></i> 删除 </a>';
+                    }
+                }]
+
+
+            });
 
             $('#aCreate').on('click', function (event) {
                 var modal = $('#EditModal');
@@ -109,34 +136,8 @@
             doDelete(DeleteUrl + '/' + id);
         }
 
-        function reGetList() {
-           lineId = $('#lines option:selected').val();
-           getTableData(lineId);
-        }
-
-        function getTableData(lineId) {
-            var table = $('#tbMembrane').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "ajax": GetListUrl,
-                "columns": [
-            { "data": "ChangeDate" },
-            { "data": "Manufacturer" },
-            { "data": "SpecificationModel" },
-            { "data": "Title" },
-            { "data": "MBRID" }
-                ],
-                "columnDefs": [{
-                    "targets": 4,
-                    "data": "opt",
-                    "render": function (data, type, full, meta) {
-                        return '<a href="#EditModal" onclick="OnEdit(' + data + ')" class="btn default btn-xs blue" data-toggle="modal"><i class="fa fa-edit"></i> 编辑 </a>' +
-                                    '<a href="javascript:void(0);" onclick="OnDelete(' + data + ')" class="btn default btn-xs blue"><i class="fa fa-trash-o"></i> 删除 </a>';
-                    }
-                }]
-
-
-            });
-        }
+        $("#lines").on("change", function () { //点击按钮 触发table重新请求服务器
+            $("#tbMembrane").dataTable().fnDraw(false);
+        });
     </script>
 }

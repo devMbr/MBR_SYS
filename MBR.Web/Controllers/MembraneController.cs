@@ -16,14 +16,18 @@ namespace MBR.Web.Controllers
     {
         private MBREntities db = new MBREntities();
 
-        public JsonResult GetList(GridPager pager, string queryStr)
+        public JsonResult GetList(GridPager pager, int LineID = 0)
         {
-            queryStr = Request["search[value]"];
+            Expression<Func<MBRMembrane, bool>> predicate = null;
             if (string.IsNullOrEmpty(pager.sort))
             {
                 pager.sort = "ChangeDate";
             }
-            Expression<Func<MBRMembrane, bool>> predicate = null;
+            if (LineID != 0)
+            {
+                predicate = m => m.LineID == LineID;
+            }
+
             using (MBREntities db = new MBREntities())
             {
                 MembraneService me = new MembraneService(db);
@@ -97,7 +101,7 @@ namespace MBR.Web.Controllers
         // POST: /Membrane/Create
 
         [HttpPost]
-        public JsonResult Create(MBRMembrane model)
+        public JsonResult Create(MBRMembrane model,int LineID)
         {
             using (MBREntities db = new MBREntities())
             {
@@ -107,7 +111,7 @@ namespace MBR.Web.Controllers
                 model.CreateDate = DateTime.Now;
                 model.UpdateBy = LogonUser.UserID;
                 model.UpdateDate = DateTime.Now;
-
+                model.LineID = LineID;
                 if (me.Create(ref errors, model))
                 {
                     return Json(JsonHandler.CreateMessage(1, Resource.InsertSucceed), JsonRequestBehavior.AllowGet);
