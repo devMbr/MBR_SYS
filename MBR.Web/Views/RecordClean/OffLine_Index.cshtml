@@ -1,0 +1,128 @@
+﻿@using MBR.Models
+@using MBR.Web
+@{
+    Layout = "~/Views/Shared/_Index_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-body">
+                <div style="float:left;width:49%;">
+                    <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                        <div class="row">
+                            选择膜：<select id="Membranes">
+                                <option value="0">全部</option>
+                            </select>
+                        </div>
+                    </div>
+                    <table id="tbRunRecord" class="table table-striped table-bordered table-hover dataTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                   日期
+                                </th>
+                                <th>
+                                    产水流量
+                                </th>
+                                <th>
+                                    透水率
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div style="float:right;width:49%;">
+                    界面介绍：工艺人员根据左表运行数据（每日）补录离线清洗（右表）的数据
+                    <a id="aCreate" class="btn btn-default btn-sm" href="#EditModal" data-toggle="modal">
+                        <i class="fa fa-plus"></i>新增
+                    </a>
+                    <table id="tbOffLineRecord" class="table table-striped table-bordered table-hover dataTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    开始时间
+                                </th>
+                                <th>
+                                    结束时间
+                                </th>
+                                <th>
+                                    药剂浓度
+                                </th>
+                                <th>
+                                    透水率恢复
+                                </th>
+                                <th>
+                                    累计氯接触值
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section header{
+    <link rel="stylesheet" href="~/plugins/datepicker/datepicker3.css">
+}
+@section Scripts{
+    <script src="~/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+
+    <script type="text/javascript">
+        var GetListUrl = '@Url.Action("GetList")';
+        var GetMembraneUrl = '@Url.Action("GetMembraneList")';
+        var GetRunRecordUrl = '@Url.Action("GetRunRecordUrl")';
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            var table = $('#tbOffLine').DataTable({
+                "searching": false,
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": GetListUrl,
+                    "type": "POST",
+                    "data": function (d) {
+                        //添加膜的参数传给服务器
+                        d.MembraneID = $('#Membranes option:selected').val();//膜的ID
+                    }
+                },
+                "columns": [
+                    { "data": "CreateDate" },
+                    { "data": "CleanType" },
+                    { "data": "Kinds" },
+                    { "data": "Concentration" },
+                    { "data": "SoakPeriod" },
+                    { "data": "BeforeClean" },
+                    { "data": "AfterClean" },
+                    { "data": "RecoveryRate" },
+                    { "data": "SingleChlorine" },
+                    { "data": "AccumulativeChlorine" },
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": "opt"
+                }]
+
+            });
+
+            $.ajax({
+                url: GetMembraneUrl,
+                type: "post",
+                success: function (result) {
+                    var option = '';
+                    $.each(result.data, function (i, membrane) {
+                        option += "<option value=" + membrane.MBRID + ">" + membrane.Title + "</option>";
+                    });
+                    jQuery("#Membranes").append(option);
+                },
+                error: function (text) { }
+            });
+        });
+
+        $("#Membranes").on("change", function () { //点击按钮 触发table重新请求服务器
+            $("#tbOffLine").dataTable().fnDraw(false);
+        });
+    </script>
+}
