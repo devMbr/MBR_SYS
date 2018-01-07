@@ -18,6 +18,7 @@ namespace MBR.Models
         {
             this.ForecastAccumulativeChlorine = new HashSet<ForecastAccumulativeChlorine>();
             this.ForecastPermeableRate = new HashSet<ForecastPermeableRate>();
+            this.CleanRecord = new HashSet<CleanRecord>();
         }
     
         public int MBRID { get; set; }
@@ -37,6 +38,7 @@ namespace MBR.Models
         public virtual ICollection<ForecastAccumulativeChlorine> ForecastAccumulativeChlorine { get; set; }
         public virtual ICollection<ForecastPermeableRate> ForecastPermeableRate { get; set; }
         public virtual Line Line { get; set; }
+        public virtual ICollection<CleanRecord> CleanRecord { get; set; }
     }
     
 }

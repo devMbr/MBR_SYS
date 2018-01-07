@@ -1,0 +1,69 @@
+﻿@model IEnumerable<MBR.Models.PermeableRrateAlert>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OnlineMin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OnlineMax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OfflineMin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OfflineMax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChangeMin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChangeMax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DurationMax)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OnlineMin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OnlineMax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OfflineMin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OfflineMax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChangeMin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChangeMax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DurationMax)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PermeableRrateAlertID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PermeableRrateAlertID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PermeableRrateAlertID })
+        </td>
+    </tr>
+}
+
+</table>

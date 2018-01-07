@@ -1,0 +1,51 @@
+﻿@model MBR.Models.MembraneAlert
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>MembraneAlert</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PermeableRateMin)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PermeableRateMin)
+            @Html.ValidationMessageFor(model => model.PermeableRateMin)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DurationMax)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DurationMax)
+            @Html.ValidationMessageFor(model => model.DurationMax)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AccumulativeChlorine)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AccumulativeChlorine)
+            @Html.ValidationMessageFor(model => model.AccumulativeChlorine)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

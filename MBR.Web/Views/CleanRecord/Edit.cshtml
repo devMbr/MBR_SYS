@@ -1,0 +1,165 @@
+﻿@model MBR.Models.CleanRecord
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>CleanRecord</legend>
+
+        @Html.HiddenFor(model => model.CleanRecordID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MBRID, "MBRMembrane")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("MBRID", String.Empty)
+            @Html.ValidationMessageFor(model => model.MBRID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CleanType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CleanType)
+            @Html.ValidationMessageFor(model => model.CleanType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StartDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StartDate)
+            @Html.ValidationMessageFor(model => model.StartDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EndDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EndDate)
+            @Html.ValidationMessageFor(model => model.EndDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Kinds)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Kinds)
+            @Html.ValidationMessageFor(model => model.Kinds)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Concentration)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Concentration)
+            @Html.ValidationMessageFor(model => model.Concentration)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SoakPeriod)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SoakPeriod)
+            @Html.ValidationMessageFor(model => model.SoakPeriod)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BeforeClean)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BeforeClean)
+            @Html.ValidationMessageFor(model => model.BeforeClean)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AfterClean)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AfterClean)
+            @Html.ValidationMessageFor(model => model.AfterClean)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SingleChlorine)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SingleChlorine)
+            @Html.ValidationMessageFor(model => model.SingleChlorine)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RecoveryRate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RecoveryRate)
+            @Html.ValidationMessageFor(model => model.RecoveryRate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AccumulativeChlorine)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AccumulativeChlorine)
+            @Html.ValidationMessageFor(model => model.AccumulativeChlorine)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Remark)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Remark)
+            @Html.ValidationMessageFor(model => model.Remark)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreateBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreateBy)
+            @Html.ValidationMessageFor(model => model.CreateBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreateDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreateDate)
+            @Html.ValidationMessageFor(model => model.CreateDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UpdateBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UpdateBy)
+            @Html.ValidationMessageFor(model => model.UpdateBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UpdateDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UpdateDate)
+            @Html.ValidationMessageFor(model => model.UpdateDate)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CleanRecord.cs">
+      <DependentUpon>MBR.tt</DependentUpon>
+    </Compile>
     <Compile Include="DATADICTIONARY.cs">
       <DependentUpon>MBR.tt</DependentUpon>
     </Compile>

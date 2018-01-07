@@ -1,0 +1,137 @@
+﻿@model MBR.Models.CleanRecord
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>CleanRecord</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MBRMembrane.Manufacturer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MBRMembrane.Manufacturer)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CleanType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CleanType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StartDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EndDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EndDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Kinds)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Kinds)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Concentration)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Concentration)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SoakPeriod)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SoakPeriod)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BeforeClean)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BeforeClean)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AfterClean)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AfterClean)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SingleChlorine)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SingleChlorine)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RecoveryRate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RecoveryRate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AccumulativeChlorine)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccumulativeChlorine)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Remark)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Remark)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateDate)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

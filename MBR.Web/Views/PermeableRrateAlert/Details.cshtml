@@ -1,0 +1,64 @@
+﻿@model MBR.Models.PermeableRrateAlert
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>PermeableRrateAlert</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OnlineMin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OnlineMin)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OnlineMax)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OnlineMax)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OfflineMin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OfflineMin)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OfflineMax)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OfflineMax)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ChangeMin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChangeMin)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ChangeMax)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChangeMax)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DurationMax)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DurationMax)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.PermeableRrateAlertID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,9 +1,7 @@
-﻿@model IEnumerable<MBR.Models.ForecastPermeableRate>
-
+﻿@model MBR.Models.ForecastPermeableRate
 @{
     ViewBag.Title = "智能预测";
 }
-
 <div class="row">
     <div class="col-md-12">
         <div class="box">
@@ -44,7 +42,7 @@
     var permeable_chart = null;
     //累积氯预测
     var chlorin_chart = null;
-
+    var plotLineValue = @Model.YValue;
     $(function () {
         $("#mbrId").change(function(){
             ajaxData();
@@ -64,8 +62,6 @@
                     option += ">" + data[i].Title + "</option>"; //动态添加数据
                     $("#mbrId").append(option);
                 }
-
-
                                 
             }
         });
@@ -84,7 +80,7 @@
 
     var permeable_Options = {
         chart: {
-            type: 'spline'
+            //type: 'spline'
         },
 
         title: {
@@ -92,7 +88,7 @@
         },
 
         xAxis: {
-            type: 'datetime',
+            type: 'linear',
             title: {
                 text: null
             }
@@ -120,28 +116,36 @@
             }
         },
         series: [{
-            name: '离线清洗后',
-
+            name: '离线清洗后预测',
+            type: 'spline',
             color: '#f7a35c'
         }, {
-            name: '离线清洗前',
-
+            name: '离线清洗前预测',
+            type: 'spline',
+            color: '#7cb5ec'
+        }, {
+            type: 'scatter',
+            name: '离线清洗后透水率',
+            color: '#f7a35c'
+        }, {
+            type: 'scatter',
+            name: '离线清洗前透水率',
             color: '#7cb5ec'
         }]
     };
 
     var chlorin_Options = {
         chart: {
-            type: 'spline'
+            //type: 'spline'
         },
 
         title: {
             text: '累积氯预测'
         },
         xAxis: {
-            type: 'datetime',
+            type: 'linear',
             title: {
-                text: '时间'
+                //text: '时间'
             }
         },
         yAxis: {
@@ -152,13 +156,14 @@
                 }
             },
 
-            //ceiling: 50,
-            min: 0
+            ceiling: plotLineValue,
+            min: 0,
+            max: 100
 
         },
         tooltip: {
             headerFormat: '<b>{series.name}</b><br>',
-            pointFormat: '{point.x:%e. %b}: {point.y:.2f}'
+            pointFormat: '{point.x:.f}: {point.y:.2f}'
         },
         plotOptions: {
             spline: {
@@ -169,9 +174,14 @@
             }
         },
         series: [{
-            name: '氯接触值',
+            type: 'spline',
+            name: '累积氯接触值预测',
             color: '#f7a35c',
 
+        }, {
+            type: 'scatter',
+            name: '累积氯接触值',
+            color: '#7cb5ec'
         }]
     }
 
@@ -189,29 +199,54 @@
             success: function (data) {
                 var bArr = new Array();
                 var dataBefer = data.befer;
-                if (dataBefer == undefined) {
-                    return;
+                debugger;
+                if (dataBefer != undefined) {
+                    for (var i = 0; i < dataBefer.length; i++) {
+                        var entity = dataBefer[i];
+                        bArr[i] = { x: entity.XValue, y: entity.YValue };
+                    }
+                    //之前数据为第二个
+                    permeable_chart.series[1].setData(bArr);
                 }
                 //之后
                 var aArr = new Array();
                 var dataAfter = data.after;
-                if (dataBefer == undefined) {
-                    return;
-                }
-                for (var i = 0; i < dataAfter.length; i++) {
-                    var entity = dataAfter[i];
-                    aArr[i] = { x: entity.XValue, y: entity.YValue };
+                
+                if (dataAfter != undefined) {
+                    for (var i = 0; i < dataAfter.length; i++) {
+                        var entity = dataAfter[i];
+                        aArr[i] = { x: entity.XValue, y: entity.YValue };
 
+                    }
+                    //之后的数据为第一个
+                    permeable_chart.series[0].setData(aArr);//数据填充到highcharts上面
                 }
-                for (var i = 0; i < dataBefer.length; i++) {
-                    var entity = dataBefer[i];
-                    bArr[i] = { x: entity.XValue, y: entity.YValue };
 
+                var a_sca = new Array();
+                var scaAfter = data.afterSca;
+                if (scaAfter != undefined) {
+                    for (var i = 0; i < scaAfter.length; i++) {
+                        var entity = scaAfter[i];
+                        a_sca[i] = { x: entity.XValue, y: entity.YValue };
+
+                    }
+                    //之后的点
+                    permeable_chart.series[2].setData(a_sca);
                 }
-                //之后的数据为第一个
-                permeable_chart.series[0].setData(aArr);//数据填充到highcharts上面
-                //之前数据为第二个
-                permeable_chart.series[1].setData(bArr);
+                
+                var b_sca = new Array();
+                var scaBefer = data.beferSca;
+                if (scaBefer != undefined) {
+                    //之前的点
+                    for (var i = 0; i < scaBefer.length; i++) {
+                        var entity = scaBefer[i];
+                        b_sca[i] = { x: entity.XValue, y: entity.YValue };
+
+                    }
+                    //var b_sca = [35, 30, 25, 23, 20, 15, 10];
+                    permeable_chart.series[3].setData(b_sca);
+                }
+
             },
             error: function () {
                 alert("请求出错处理");
@@ -225,12 +260,39 @@
         data: { mbrId: mbrId },
         success: function (data) {
             //chlorin_chart
-            var arr = new Array();
-            for (var i = 0; i < data.length; i++) {
-                var entity = data[i];
-                arr[i] = { x: entity.XValue, y: entity.YValue };
+            var lineList = data.lineList;
+            if (lineList != undefined) {
+                var arr = new Array();
+                for (var i = 0; i < lineList.length; i++) {
+                    var entity = lineList[i];
+                    arr[i] = { x: entity.XValue, y: entity.YValue };
+                }
+                chlorin_chart.series[0].setData(arr);
             }
-            chlorin_chart.series[0].setData(arr);
+
+            var scaList = data.scaList;
+            if (scaList != undefined) {
+                var sca = new Array();
+                for (var i = 0; i < scaList.length; i++) {
+                    var entity = scaList[i];
+                    sca[i] = { x: entity.XValue, y: entity.YValue };
+                }
+                chlorin_chart.series[1].setData(sca);
+            }
+            //var plotLineValue = data.plotLineValue;
+           
+            if (plotLineValue != undefined) {
+                chlorin_chart.yAxis[0].addPlotLine({           //在y轴上增加
+                    value: plotLineValue,                           //在值为2的地方
+                    width: 2,                           //标示线的宽度为2px
+                    color: 'red',
+                    dashStyle: 'solid',
+                    id: 'plot-line-1'                  //标示线的id，在删除该标示线的时候需要该id标示
+
+                });
+                
+               
+            }
         },
         error: function () {
             alert("请求出错处理");
