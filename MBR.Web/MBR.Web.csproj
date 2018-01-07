@@ -129,13 +129,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CleanRecordController.cs" />
     <Compile Include="Controllers\ForecastAccumulativeChlorineController.cs" />
     <Compile Include="Controllers\ForecastPermeableRateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MembraneAlertController.cs" />
     <Compile Include="Controllers\MembraneController.cs" />
-    <Compile Include="Controllers\PermeableRrateAlertController.cs" />
+    <Compile Include="Controllers\RecordCleanController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\RunRecordController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -159,6 +158,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\RecordCleanService.cs" />
     <Compile Include="Services\WarnRuleModelsService.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\LineService.cs" />
@@ -1445,6 +1445,8 @@
     <Content Include="Views\CleanRecord\Edit.cshtml" />
     <Content Include="Views\CleanRecord\Delete.cshtml" />
     <Content Include="Views\MembraneAlert\WarnRuleEdit.cshtml" />
+    <Content Include="Views\RecordClean\Index.cshtml" />
+    <Content Include="Views\RecordClean\OffLine_Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
