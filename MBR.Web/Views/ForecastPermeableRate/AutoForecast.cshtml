@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "智能预测";
 }
-@Html.Encode(Model.YValue)
 <div class="row">
     <div class="col-md-12">
         <div class="box">
@@ -117,11 +116,11 @@
             }
         },
         series: [{
-            name: '离线清洗后',
+            name: '离线清洗后预测',
             type: 'spline',
             color: '#f7a35c'
         }, {
-            name: '离线清洗前',
+            name: '离线清洗前预测',
             type: 'spline',
             color: '#7cb5ec'
         }, {
@@ -200,6 +199,7 @@
             success: function (data) {
                 var bArr = new Array();
                 var dataBefer = data.befer;
+                debugger;
                 if (dataBefer != undefined) {
                     for (var i = 0; i < dataBefer.length; i++) {
                         var entity = dataBefer[i];

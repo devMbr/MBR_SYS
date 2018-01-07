@@ -25,8 +25,10 @@ namespace MBR.Web.Controllers
 
         public ActionResult AutoForecast()
         {
+            MembraneAlert ma =  db.MembraneAlert.First();
+            double maxChlorine =(double) ma.AccumulativeChlorine;
             ForecastPermeableRate t = new ForecastPermeableRate();
-            t.YValue =40;
+            t.YValue = maxChlorine;
             return View(t);
         }
         public JsonResult GetMBRInfo()
@@ -61,19 +63,6 @@ namespace MBR.Web.Controllers
                     twoSquare = double.Parse(arr[2]);
                     threeSquare = double.Parse(arr[3]);
                 }
-                //fx =ax3+bx2+cx+d;
-
-                for (int i = 1; i < 15; i++)
-                {
-                    ForecastPermeableRate t = new ForecastPermeableRate();
-
-                    double number = threeSquare + Math.Pow(i, 3) / twoSquare+ Math.Pow(i, 2) + primarySide*i + constant;
-                    t.XValue = i;
-                    t.YValue = number;
-                    list.Add(t);
-                }
-                dic.Add("after", list);
-
                 //之前
                 string before = entity.FormulaBefore;
 
@@ -90,44 +79,65 @@ namespace MBR.Web.Controllers
                     b_threeSquare = double.Parse(arr[3]);
                 }
 
+                //fx =ax3+bx2+cx+d;
+                //查询清洗记录
+                List<CleanRecord> crList = db.CleanRecord.Where(m => m.MBRID == mbrId).OrderBy(m => m.CreateDate).ToList();
+
                 List<ForecastPermeableRate> blist = new List<ForecastPermeableRate>();
-                for (int i = 1; i <15; i++)
+                for (int i = 1; i < crList.Count+100; i++)
                 {
                     ForecastPermeableRate t = new ForecastPermeableRate();
-                    double number = b_threeSquare + Math.Pow(i,3) / (b_twoSquare + Math.Pow(i, 2)) + b_primarySide * i + b_constant;
-                    t.XValue =  i;
+                    //清洗之后的透水率预测 TODO 算法
+                    double number = (double)(100 - i)/1.5;//threeSquare + Math.Pow(i, 3) / twoSquare+ Math.Pow(i, 2) + primarySide*i + constant;
+                    t.XValue = i;
                     t.YValue = number;
+                    list.Add(t);
 
-                    blist.Add(t);
+                    //清洗之前的透水率预测
+                    ForecastPermeableRate tb = new ForecastPermeableRate();
+                    double number_tb = (double)i*1.5;//b_threeSquare + Math.Pow(i, 3) / (b_twoSquare + Math.Pow(i, 2)) + b_primarySide * i + b_constant;
+                    tb.XValue = i;
+                    tb.YValue = number_tb;
+                    blist.Add(tb);
+                    if (number_tb> number)
+                    {
+                        t.YValue = number_tb;
+                        break;
+                    }
+                    
                 }
+                dic.Add("after", list);
                 dic.Add("befer", blist);
 
+                
                 //之后的透水率点
-                List<ForecastPermeableRate> saclist = new List<ForecastPermeableRate>();
-                Random r = new Random();
-                for (int i = 1; i < 15; i++)
-                {
-                    ForecastPermeableRate t = new ForecastPermeableRate();
-
-                    double number = r.Next(i, 80);
-                    t.XValue = i;
-                    t.YValue = number;
-                    saclist.Add(t);
-                }
-                dic.Add("afterSca", saclist);
+                List<ForecastPermeableRate> sac_alist = new List<ForecastPermeableRate>();
 
                 //之前的透水率点
-                List<ForecastPermeableRate> sacbList = new List<ForecastPermeableRate>();
-                for (int i = 1; i < 15; i++)
+                List<ForecastPermeableRate> sac_bList = new List<ForecastPermeableRate>();
+                for (int i = 0; i < crList.Count; i++)
                 {
-                    ForecastPermeableRate t = new ForecastPermeableRate();
+                    CleanRecord rc = crList[i];
+                    ForecastPermeableRate befer_t = new ForecastPermeableRate();
+                    //清洗前透水率
+                    double number = (double)rc.BeforeClean;
+                    befer_t.XValue = i;
+                    befer_t.YValue = number;
 
-                    double number = r.Next(i, 80);
-                    t.XValue = i;
-                    t.YValue = number;
-                    sacbList.Add(t);
+                    sac_bList.Add(befer_t);
+
+                    ForecastPermeableRate after_t = new ForecastPermeableRate();
+
+                    double a_number = (double)rc.AfterClean;
+                    after_t.XValue = i;
+                    after_t.YValue = a_number;
+                    sac_alist.Add(after_t);
                 }
-                dic.Add("beferSca", sacbList);
+                //之前
+                dic.Add("beferSca", sac_bList);
+                //之后
+                dic.Add("afterSca", sac_alist);
+                
 
             }
             return Json(dic, JsonRequestBehavior.AllowGet);
@@ -154,25 +164,29 @@ namespace MBR.Web.Controllers
                     twoSquare = double.Parse(arr[2]);
                     threeSquare = double.Parse(arr[3]);
                 }
-
+                //预测 积累氯
                 for (int i = 1; i < 15; i++)
                 {
                     ForecastAccumulativeChlorine t = new ForecastAccumulativeChlorine();
-                    double number = primarySide * i + constant;// threeSquare + Math.Pow(i, 3) / (twoSquare + Math.Pow(i, 2)) + primarySide * i + constant;
+                    double number = i * 1.5;// primarySide * i + constant;// threeSquare + Math.Pow(i, 3) / (twoSquare + Math.Pow(i, 2)) + primarySide * i + constant;
                     t.XValue = i;
                     t.YValue = number;
                     list.Add(t);
                 }
                 dic.Add("lineList",list);
-                //之前的透水率点
+                //之前的累积氯值
                 List<ForecastAccumulativeChlorine> sacList = new List<ForecastAccumulativeChlorine>();
-                Random r = new Random();
-                for (int i = 1; i < 15; i++)
+
+                //查询清洗记录
+                List<CleanRecord> crList = db.CleanRecord.Where(m => m.MBRID == mbrId).OrderBy(m => m.CreateDate).ToList();
+                
+                for (int i = 0; i < crList.Count; i++)
                 {
+                    CleanRecord rc = crList[i];
                     ForecastAccumulativeChlorine t = new ForecastAccumulativeChlorine();
 
-                    double number = r.Next(i, 80);
-                    t.XValue = i;
+                    double number =(double) rc.AccumulativeChlorine;
+                    t.XValue = i+1;
                     t.YValue = number;
                     sacList.Add(t);
                 }
