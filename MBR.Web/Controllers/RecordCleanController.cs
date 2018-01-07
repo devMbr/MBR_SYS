@@ -1,20 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
+using System.Data.Entity;
 using System.Web.Mvc;
+using System.Linq.Expressions;
 using MBR.Models;
+using MBR.Web.Services;
+using System.Data;
 
 namespace MBR.Web.Controllers
 {
-    public class CleanRecordController : BaseController
+    public class RecordCleanController : Controller
     {
         private MBREntities db = new MBREntities();
 
         //
-        // GET: /CleanRecord/
+        // GET: /RecordClean/
 
         public ActionResult Index()
         {
@@ -22,8 +22,63 @@ namespace MBR.Web.Controllers
             return View(cleanrecord.ToList());
         }
 
+        [ActionName("OffLine_Index")]
+        public ActionResult OffLine_Index()
+        {
+            return View();
+        }
+
+        public JsonResult GetList(GridPager pager, int MBRID = 0)
+        {
+            Expression<Func<CleanRecord, bool>> predicate = null;
+            if (string.IsNullOrEmpty(pager.sort))
+            {
+                pager.sort = "CreateDate";
+            }
+            if (MBRID != 0)
+            {
+                predicate = m => m.MBRID == MBRID;
+            }
+            using (MBREntities db = new MBREntities())
+            {
+                RecordCleanService me = new RecordCleanService(db);
+                var query = me.GetList(ref pager, predicate);
+                var json = new
+                {
+                    draw = pager.draw,
+                    recordsTotal = pager.recordsFiltered,
+                    recordsFiltered = pager.recordsTotal,
+                    data = query.Select(m => new { m.CleanRecordID,m.CreateDate, m.CleanType, m.Kinds, m.Concentration, m.SoakPeriod,m.BeforeClean,m.AfterClean,m.AccumulativeChlorine,m.RecoveryRate,m.SingleChlorine })
+                };
+                return Json(json, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetMembraneList(GridPager pager, string queryStr)
+        {
+            queryStr = Request["search[value]"];
+            if (string.IsNullOrEmpty(pager.sort))
+            {
+                pager.sort = "ChangeDate";
+            }
+            Expression<Func<MBRMembrane, bool>> predicate = null;
+            using (MBREntities db = new MBREntities())
+            {
+                MembraneService me = new MembraneService(db);
+                var query = me.GetList(ref pager, predicate);
+                var json = new
+                {
+                    draw = pager.draw,
+                    recordsTotal = pager.recordsFiltered,
+                    recordsFiltered = pager.recordsTotal,
+                    data = query.Select(m => new { m.MBRID, m.Title })
+                };
+                return Json(json, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         //
-        // GET: /CleanRecord/Details/5
+        // GET: /RecordClean/Details/5
 
         public ActionResult Details(int id = 0)
         {
@@ -36,7 +91,7 @@ namespace MBR.Web.Controllers
         }
 
         //
-        // GET: /CleanRecord/Create
+        // GET: /RecordClean/Create
 
         public ActionResult Create()
         {
@@ -45,7 +100,7 @@ namespace MBR.Web.Controllers
         }
 
         //
-        // POST: /CleanRecord/Create
+        // POST: /RecordClean/Create
 
         [HttpPost]
         public ActionResult Create(CleanRecord cleanrecord)
@@ -62,7 +117,7 @@ namespace MBR.Web.Controllers
         }
 
         //
-        // GET: /CleanRecord/Edit/5
+        // GET: /RecordClean/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
@@ -76,7 +131,7 @@ namespace MBR.Web.Controllers
         }
 
         //
-        // POST: /CleanRecord/Edit/5
+        // POST: /RecordClean/Edit/5
 
         [HttpPost]
         public ActionResult Edit(CleanRecord cleanrecord)
@@ -92,7 +147,7 @@ namespace MBR.Web.Controllers
         }
 
         //
-        // GET: /CleanRecord/Delete/5
+        // GET: /RecordClean/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
@@ -105,7 +160,7 @@ namespace MBR.Web.Controllers
         }
 
         //
-        // POST: /CleanRecord/Delete/5
+        // POST: /RecordClean/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
