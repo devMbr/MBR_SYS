@@ -1,7 +1,5 @@
 ﻿@model MBR.Models.ForecastPermeableRate
-@{
-    ViewBag.Title = "智能预测";
-}
+
 <div class="row">
     <div class="col-md-12">
         <div class="box">
@@ -37,7 +35,7 @@
         </div>
     </div>
 </div>
-
+@section Scripts{
 <script type="text/javascript">
     var permeable_chart = null;
     //累积氯预测
@@ -105,7 +103,7 @@
         },
         tooltip: {
             headerFormat: '<b>{series.name}</b><br>',
-            pointFormat: '{point.x:%e. %b}: {point.y:.2f}'
+            pointFormat: '{point.x:.f}: {point.y:.2f}'
         },
         plotOptions: {
             spline: {
@@ -301,3 +299,4 @@
 }
 
 </script>
+}

@@ -88,10 +88,11 @@ namespace MBR.Web.Controllers
                 {
                     ForecastPermeableRate t = new ForecastPermeableRate();
                     //清洗之后的透水率预测 TODO 算法
-                    double number = (double)(100 - i)/1.5;//threeSquare + Math.Pow(i, 3) / twoSquare+ Math.Pow(i, 2) + primarySide*i + constant;
+                    double number = i * i;//(double)(100 - i)/1.5;//threeSquare + Math.Pow(i, 3) / twoSquare+ Math.Pow(i, 2) + primarySide*i + constant;
                     t.XValue = i;
                     t.YValue = number;
                     list.Add(t);
+                    
 
                     //清洗之前的透水率预测
                     ForecastPermeableRate tb = new ForecastPermeableRate();
@@ -101,8 +102,9 @@ namespace MBR.Web.Controllers
                     blist.Add(tb);
                     if (number_tb> number)
                     {
+                        //清洗之后的值如果小于清洗之前的，吧清洗之前的值赋给之后的，并是最后次
                         t.YValue = number_tb;
-                        break;
+                        //break;
                     }
                     
                 }
@@ -150,6 +152,10 @@ namespace MBR.Web.Controllers
             List<ForecastAccumulativeChlorine> list = new List<ForecastAccumulativeChlorine>();
             if (entity != null)
             {
+                //累积氯的设置最大值
+                MembraneAlert ma = db.MembraneAlert.First();
+                double maxChlorine = (double)ma.AccumulativeChlorine;
+
                 string formula = entity.Formula;
 
                 double constant = 0;
@@ -169,9 +175,17 @@ namespace MBR.Web.Controllers
                 {
                     ForecastAccumulativeChlorine t = new ForecastAccumulativeChlorine();
                     double number = i * 1.5;// primarySide * i + constant;// threeSquare + Math.Pow(i, 3) / (twoSquare + Math.Pow(i, 2)) + primarySide * i + constant;
+                    
                     t.XValue = i;
+                    
                     t.YValue = number;
                     list.Add(t);
+                    if (number >= maxChlorine)
+                    {
+                        t.YValue = maxChlorine;
+                        break;
+                    }
+
                 }
                 dic.Add("lineList",list);
                 //之前的累积氯值

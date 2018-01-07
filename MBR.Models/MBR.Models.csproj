@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlertRule.cs">
+      <DependentUpon>MBR.tt</DependentUpon>
+    </Compile>
     <Compile Include="CleanRecord.cs">
       <DependentUpon>MBR.tt</DependentUpon>
     </Compile>
@@ -60,6 +63,9 @@
     <Compile Include="Extend\ForecastAccumulativeChlorine.cs" />
     <Compile Include="Extend\ForecastPermeableRate.cs" />
     <Compile Include="Extend\Membrane.cs" />
+    <Compile Include="Extend\AlertRule.cs" />
+    <Compile Include="Extend\MembraneAlert.cs" />
+    <Compile Include="Extend\PermeableRrateAlert.cs" />
     <Compile Include="Extend\User.cs" />
     <Compile Include="ForecastAccumulativeChlorine.cs">
       <DependentUpon>MBR.tt</DependentUpon>

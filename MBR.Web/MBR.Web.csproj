@@ -151,6 +151,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\WarnRuleModels.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.Designer.cs">
@@ -158,10 +159,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\WarnRuleModelsService.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\LineService.cs" />
+    <Compile Include="Services\AlertRuleService.cs" />
+    <Compile Include="Services\PermeableRrateAlertService.cs" />
     <Compile Include="Services\MembraneService.cs" />
     <Compile Include="Services\RunRecordService.cs" />
+    <Compile Include="Services\MembraneAlertService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\ModuleService.cs" />
     <Compile Include="Util\Encrypt.cs" />
@@ -1439,6 +1444,7 @@
     <Content Include="Views\CleanRecord\Create.cshtml" />
     <Content Include="Views\CleanRecord\Edit.cshtml" />
     <Content Include="Views\CleanRecord\Delete.cshtml" />
+    <Content Include="Views\MembraneAlert\WarnRuleEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -43,5 +43,6 @@ namespace MBR.Models
         public DbSet<Test> Test { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<CleanRecord> CleanRecord { get; set; }
+        public DbSet<AlertRule> AlertRule { get; set; }
     }
 }

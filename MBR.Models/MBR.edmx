@@ -5,6 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MBRModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="AlertRule">
+          <Key>
+            <PropertyRef Name="AlertRuleID" />
+          </Key>
+          <Property Name="AlertRuleID" Type="int" Nullable="false" />
+          <Property Name="RuleName" Type="varchar" MaxLength="255" />
+          <Property Name="AltertInfo" Type="text" />
+          <Property Name="Duration" Type="double" />
+          <Property Name="AheadOfTime" Type="double" />
+          <Property Name="Rules" Type="text" />
+        </EntityType>
         <EntityType Name="CleanRecord">
           <Key>
             <PropertyRef Name="CleanRecordID" />
@@ -405,6 +416,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MBRModelStoreContainer">
+          <EntitySet Name="AlertRule" EntityType="Self.AlertRule" Schema="mbr" store:Type="Tables" />
           <EntitySet Name="CleanRecord" EntityType="Self.CleanRecord" Schema="mbr" store:Type="Tables" />
           <EntitySet Name="DATADICTIONARY" EntityType="Self.DATADICTIONARY" Schema="mbr" store:Type="Tables" />
           <EntitySet Name="DATADICTIONARYDETAIL" EntityType="Self.DATADICTIONARYDETAIL" Schema="mbr" store:Type="Tables" />
@@ -540,6 +552,7 @@
             <End Role="MBRMembrane" EntitySet="MBRMembrane" />
             <End Role="CleanRecord" EntitySet="CleanRecord" />
           </AssociationSet>
+          <EntitySet Name="AlertRule" EntityType="MBRModel.AlertRule" />
         </EntityContainer>
         <EntityType Name="DATADICTIONARY">
           <Key>
@@ -934,6 +947,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AlertRule">
+          <Key>
+            <PropertyRef Name="AlertRuleID" />
+          </Key>
+          <Property Name="AlertRuleID" Type="Int32" Nullable="false" />
+          <Property Name="RuleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AltertInfo" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="Duration" Type="Double" />
+          <Property Name="AheadOfTime" Type="Double" />
+          <Property Name="Rules" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1213,6 +1237,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AlertRule">
+            <EntityTypeMapping TypeName="MBRModel.AlertRule">
+              <MappingFragment StoreEntitySet="AlertRule">
+                <ScalarProperty Name="Rules" ColumnName="Rules" />
+                <ScalarProperty Name="AheadOfTime" ColumnName="AheadOfTime" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="AltertInfo" ColumnName="AltertInfo" />
+                <ScalarProperty Name="RuleName" ColumnName="RuleName" />
+                <ScalarProperty Name="AlertRuleID" ColumnName="AlertRuleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1302,6 +1338,7 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="MBRModel.CleanRecord" Width="1.5" PointX="7.25" PointY="11.625" />
         <AssociationConnector Association="MBRModel.FK_Reference_13" />
+        <EntityTypeShape EntityType="MBRModel.AlertRule" Width="1.5" PointX="9.375" PointY="13.75" />
       </Diagram>
     </Diagrams>
   </Designer>
