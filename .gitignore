@@ -12,3 +12,6 @@ MBR.sln
 MBR.Web/MBR.Web.csproj
 MBR.Web/MBR.Web.csproj.user
 MBR.suo
+*.suo
+MBR.Web/exceptionLog.txt
+*.suo
